@@ -20,7 +20,7 @@ class App extends Component {
       sobrenome: this.refs.sobrenome.value,
       status: 1
     };    
-   await api.post('/usuarios', data).then((response) => {
+   await api.post('/criarUsuario', data).then((response) => {
       if(response.data.status === 401){
         console.log(response.data);
         this.refs.nome.value = "";
