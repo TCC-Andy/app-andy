@@ -21,10 +21,11 @@ class App extends Component {
       status: 1
     };    
    await api.post('/usuarios', data).then((response) => {
-      if(response.data){
+      if(response.data.status === 401){
+        console.log(response.data);
         this.refs.nome.value = "";
         this.refs.sobrenome.value = "";
-        return alert('usuario cadastrado com sucesso');
+        return alert(response.data.menssagem);
       } else {
         console.log('erro ao cadastrar usuario');
       }
