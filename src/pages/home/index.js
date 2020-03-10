@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import Helmet from 'react-helmet';
 import './style.css';
+import barbearia from '../../assets/images/barbearia.jpg';
+import salao from '../../assets/images/salao.jpg';
+import lavaCar from '../../assets/images/lavacar.png';
+import mecanica from '../../assets/images/mecanica.jpeg';
 import { IoMdLogIn } from 'react-icons/io';
-import { FiPhoneCall } from 'react-icons/fi';
 import { Container, 
     Row, 
     Col,
@@ -12,9 +15,10 @@ import { Container,
     NavbarBrand,
     Button
 } from 'reactstrap';
+
 const Home = () => {
     const [isOpen, setIsOpen] = useState(false);
-
+    
     const toggle = () => setIsOpen(!isOpen);
     return(
         <div className="site">
@@ -58,24 +62,58 @@ const Home = () => {
                             </h6>
                         </Col>
                     </Row>
-                    <br />
-                    <Button className="contato" color="primary"><FiPhoneCall /> Entre em contato com nossa equipe de Vendas.</Button>
-                    <br />
-                    <br />
-                    <br />
-                    <br />
                 </Container>
             </div>
-           {/* <div className="services">
-            <Container className="themed-container" fluid={true} >
+            <div className="service">
+            <Container className="service-container" fluid={true} >
                 <Row xs="1" sm="2" md="4">
-                    <Col>Column</Col>
-                    <Col>Column</Col>
-                    <Col>Column</Col>
-                    <Col>Column</Col>
+                    <Col xs="3">
+                        <div className="services">
+                            <img className="imagem" src={barbearia} alt="Barbearia." />
+                            <div className="fundo_card">
+                                <div className="texto">
+                                    <span className="titulo_card">Barbearia</span><br />
+                                    <span className="mensagem_card">Com mais de 628.110 profissionais de beleza, ter relacionamento com o seu cliente é fundamental.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </Col>
+                    <Col xs="3">
+                        <div className="services">
+                            <img className="imagem" src={lavaCar} alt="Barbearia." />
+                            <div className="fundo_card">
+                                <div className="texto">
+                                    <span className="titulo_card">Lava-Car</span><br />
+                                    <span className="mensagem_card">Com mais de 628.110 profissionais de beleza, ter relacionamento com o seu cliente é fundamental.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </Col>
+                    <Col xs="3">
+                        <div className="services">
+                            <img className="imagem" src={salao} alt="Barbearia." />
+                            <div className="fundo_card">
+                                <div className="texto">
+                                    <span className="titulo_card">Salão de Beleza</span><br />
+                                    <span className="mensagem_card">Com mais de 628.110 profissionais de beleza, ter relacionamento com o seu cliente é fundamental.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </Col>
+                    <Col xs="3">
+                        <div className="services">
+                            <img className="imagem" src={mecanica} alt="Barbearia." />
+                            <div className="fundo_card">
+                                <div className="texto">
+                                    <span className="titulo_card">Mecanica</span><br />
+                                    <span className="mensagem_card">Com mais de 628.110 profissionais de beleza, ter relacionamento com o seu cliente é fundamental.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </Col>
                 </Row>
             </Container>
-            </div> */}
+            </div>
         </div>
     );
 }
