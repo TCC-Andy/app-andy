@@ -23,7 +23,7 @@ body {
     position: relative;
     background-size: cover;
     width: 100%;
-    height: 660px;
+    height: 700px;
 }
 
 .associados {
@@ -50,11 +50,22 @@ body {
     text-align: right;
 }
 
-.service {
+.titulo {
+    font-family: Caveat-Regular;
+    color: #ffffff;
+    text-align: center;
+}
+.service, .info {
     background-color: #7159C6;
     padding-top: 50px;
+    padding-bottom: 70px;
     width: 100%;
-    height: 400px;
+    height: auto;
+}
+
+.services, .infos {
+    padding-top: 50px;
+    text-align: center;
 }
 
 .imagem{
@@ -79,13 +90,60 @@ body {
     text-align: center;
 }
 
-.titulo_card{
+.titulo_card {
     font-family: Roboto-Regular;
     font-size: 20px;
     color: rgb(126, 10, 126);
 }
 
-.mensagem_card {
+.titulo_infor, .mensagem_info {
+    font-family: Roboto-Regular;
+    font-size: 20px;
+    color: #ffffff;
+}
+
+.mensagem_card, .mensagem_info {
     font-family: Roboto-Regular;
     font-size: 15px;
+}
+
+.icone {
+    font-size: 60px;
+    color: #ffffff;
+}
+
+.titulo_info {
+    font-size: 30px;
+}
+
+.mensagem_info {
+    font-size: 20px;
+}
+
+.rodape {
+    background: #000000;
+    box-shadow: 0 -10px 10px rgba(225, 2255, 255, 0.502);
+    padding-top: 50px;
+    padding-bottom: 50px;
+    height: 120px;
+}
+
+.redes-sociais {
+    text-align: center;
+    font-size: 35px;
+    color: #ffffff;
+}
+
+.contato {
+    text-align: left;
+    color: #ffffff;
+    font-size: 15px;
+}
+
+.direitos {
+    text-align: right;
+    color: #ffffff;
+    font-size: 15px;
+    position: relative;
+    margin-top: 48px;
 }
