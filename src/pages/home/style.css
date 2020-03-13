@@ -32,12 +32,13 @@ body {
 
 .mensagem {
     font-family: Roboto-Regular, sans-serif;
-    color: #ee4266;
+    color: #715AFF;
     font-size: 40px;
     font-weight: 700;
     line-height: 50px;
     padding-top: 20px;
     margin-left: 15px;
+    text-shadow: 2px 2px 3px #000000;
 }
 
 .frase {

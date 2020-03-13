@@ -48,7 +48,7 @@ const Home = () => {
                                 <NavbarToggler onClick={toggle} />
                                 <Collapse isOpen={isOpen} navbar>
                                 <div className="associados">
-                                    <Button color="success"><IoMdLogIn /> Login</Button>
+                                    <Button color="success" href="../login"><IoMdLogIn /> Login</Button>
                                 </div>
                                 </Collapse>
                             </Navbar>
