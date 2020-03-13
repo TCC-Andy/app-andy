@@ -55,7 +55,7 @@ class Cadastro extends Component {
                       <label htmlFor="password">Password</label>
                       <input type="password" className="form-control" id="password" ref="password"/>
                     </div>
-                    <button type="submit" className="btn btn-success">Cadastrar </button>
+                    <button type="submit" className="btn btn-danger">Cadastrar </button>
                     <Link className="txt1" to="../login"> Login </Link>
                   </form>
                 </div>
