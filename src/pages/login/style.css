@@ -26,3 +26,31 @@ body, html {
     background-color: #7159C6 !important;
     border: none !important;
 }
+
+.txt1 {
+    text-decoration: none;
+    margin-left: 5px;
+    color: #ffffff;
+}
+
+.txt1:hover {
+    text-decoration: none;
+    margin-left: 5px;
+    color: #ffffff;
+}
+
+.txt2 {
+    text-decoration: none;
+    margin-left: 15px;
+    color: #ffffff;
+}
+
+.txt2:hover {
+    text-decoration: none;
+    margin-left: 15px;
+    color: #ffffff;
+}
+
+label {
+    color: #ffffff;
+}

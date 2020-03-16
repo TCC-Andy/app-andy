@@ -18,11 +18,16 @@ body, html {
     height: 700px;
 }
 
-.teste {
-    margin-top: 200px;
+.card-cadastro {
+    margin-top: 140px;
 }
 
 .bg-andy {
     background-color: #7159C6 !important;
     border: none !important;
+}
+
+.menssagem{
+    margin-top: 10px;
+    text-align: center;
 }
