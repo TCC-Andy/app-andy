@@ -24,6 +24,8 @@ class Login extends Component {
     };
     await api.post('/authenticateUser', data).then((response) => {
       if (response.data.status === 200) {
+        localStorage.setItem('Key_Andy', response.data.token);
+        localStorage.setItem('Key_Id', response.data.usuario._id);
         setTimeout(function () {
           history.push('/home');
         }, 1500);
