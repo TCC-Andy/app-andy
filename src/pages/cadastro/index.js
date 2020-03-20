@@ -27,7 +27,7 @@ class Cadastro extends Component {
       sobrenome: this.refs.sobrenome.value,
       email: this.refs.email.value,
       senha: this.refs.senha.value,
-      perfil: 'empresa'
+      perfil: 'empresa'  
     };
     await api.post('/createUser', data).then((response) => {
       if (response.data.status === 200) {

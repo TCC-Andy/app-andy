@@ -1,13 +1,30 @@
 import React from 'react';
-import { Router, Route } from 'react-router-dom';
+import { Router, Route, Redirect } from 'react-router-dom';
 import history from '../service/history';
-import PrivateRoute from '../service/privateRoute';
 import Home from '../pages/home/index';
+import IsAuth from '../service/auth';
 import Login from '../pages/login/index';
 import Cadastro from '../pages/cadastro/index';
 import ForgoutPassword from '../pages/forgoutPassword/index';
 import ResetPassword from '../pages/resetPassword/index';
 import HomeSistema from '../pages/sistema/index';
+
+const PrivateRoute = ({ component: Component, ...rest }) => (
+    <Route
+        {...rest}
+        render={props => (
+            <IsAuth /> ?
+                (
+                    <Component {...props} />
+                )
+                :
+                (
+                    <Redirect to={{ pathname: "/", state: { from: props.location } }} />
+                )
+        )
+        }
+    />
+)
 
 const Routes = () => {
     return (
@@ -21,5 +38,13 @@ const Routes = () => {
         </Router>
     );
 }
-
+/*
+const Routes = () => (
+    <BrowserRouter>
+        <Switch>
+            <Route path='/' exact component={Principal} />
+            <PrivateRoute path='/nfe/:token' component={Nfe} />
+        </Switch>
+    </BrowserRouter>
+);*/
 export default Routes;

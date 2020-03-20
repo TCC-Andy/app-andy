@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-//import Helmet from 'react-helmet';
-//import { Link } from 'react-router-dom';
 import api from '../../service/api';
+import history from '../../service/history';
+
 //import './style.css';
 
 class HomeSistema extends Component {
@@ -20,25 +20,30 @@ class HomeSistema extends Component {
         const token = localStorage.getItem('Key_Andy');
         const id = localStorage.getItem('Key_Id');
     
-        await api.get(`/verifyToken/${id}`, {
-            headers: {
-                "authorization": `Bearer ${token}`
-            }
-        }).then((response) => {
-            if(response.data.status === 200) {
-                this.setState({
-                    logged: true
-                })
-            } else {
-                localStorage.removeItem('Key_Andy');
-                localStorage.removeItem('Key_Id');
-                this.setState({
-                    logged: false
-                });
-            }
-        }).catch ((err) => {
-            console.log(err);
-        });
+        if(token !== null){
+            await api.get(`/verifyToken/${id}`, {
+                headers: {
+                    "authorization": `Bearer ${token}`
+                }
+            }).then((response) => {
+                if(response.data.status === 200) {
+                    this.setState({
+                        logged: true
+                    })
+                } else {
+                    localStorage.removeItem('Key_Andy');
+                    localStorage.removeItem('Key_Id');
+                    this.setState({
+                        logged: false
+                    });
+                    history.push('/');
+                }
+            }).catch ((err) => {
+                console.log(err);
+            });
+        }else{
+            history.push('/');
+        }
     }
 
     render() {
