@@ -1,14 +1,18 @@
 import React from 'react';
-import { Router, Route, Redirect } from 'react-router-dom';
+import { Router, Route } from 'react-router-dom';
 import history from '../service/history';
 import Home from '../pages/home/index';
-import IsAuth from '../service/auth';
+//import IsAuth from '../service/auth';
 import Login from '../pages/login/index';
 import Cadastro from '../pages/cadastro/index';
 import ForgoutPassword from '../pages/forgoutPassword/index';
 import ResetPassword from '../pages/resetPassword/index';
-import HomeSistema from '../pages/sistema/index';
-
+import Dashbords from '../pages/sistema/dashbords';
+import Agenda from '../pages/sistema/agenda';
+import Funcionarios from '../pages/sistema/funcionarios';
+import Servicos from '../pages/sistema/servicos';
+import MeuPerfil from '../pages/sistema/meuPerfil';
+/*
 const PrivateRoute = ({ component: Component, ...rest }) => (
     <Route
         {...rest}
@@ -25,7 +29,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
         }
     />
 )
-
+*/
 const Routes = () => {
     return (
         <Router history={history}>
@@ -34,7 +38,11 @@ const Routes = () => {
             <Route path="/cadastro" component={Cadastro}></Route>
             <Route path="/forgoutPassword" component={ForgoutPassword}></Route>
             <Route path="/resetPassword/:token" component={ResetPassword}></Route>
-            <PrivateRoute path="/home" component={HomeSistema} />
+            <Route path="/dashbords" component={Dashbords} />
+            <Route path="/agenda" component={Agenda} />
+            <Route path="/funcionarios" component={Funcionarios} />
+            <Route path="/servicos" component={Servicos} />
+            <Route path="/meuPerfil" component={MeuPerfil} />
         </Router>
     );
 }

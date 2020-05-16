@@ -1,0 +1,33 @@
+.corpo {
+    background: #f0f0f5;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+    position: fixed;
+    overflow: hidden;
+    padding-left: 310px;
+}
+
+.botao {
+    margin-right: 10px;
+}
+
+.title {
+    padding: 10px;
+    color: #7159C6;
+    font-weight: 900;
+}
+
+.subTitulos {
+    color: #000000;
+}
+
+.bgHead {
+    background-color: #7159C6;
+    color: #ffffff;
+}
+
+.pencilTrash{
+    cursor: pointer;
+}

@@ -1,6 +1,24 @@
-body {
+@font-face {
+    font-family: Roboto-Regular;
+    src: url('./fonts/Roboto-Regular.ttf'); 
+}
+
+* {
     margin: 0;
     padding: 0;
-    font-family: sans-serif;
+    outline: 0;
+    box-sizing: border-box;
+}
+body {
+    font: 400 14px Roboto-Regular, sans-serif;
     width: 100%;
+    -webkit-font-smoothing: antialiased;
+}
+
+input, button, textarea {
+    font: 400 14px Roboto-Regular, sans-serif;
+}
+
+button {
+    cursor: pointer;
 }

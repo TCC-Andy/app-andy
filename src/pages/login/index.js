@@ -27,7 +27,7 @@ class Login extends Component {
         localStorage.setItem('Key_Andy', response.data.token);
         localStorage.setItem('Key_Id', response.data.usuario._id);
         setTimeout(function () {
-          history.push('/home');
+          history.push('/dashbords');
         }, 1500);
         return alert(response.data.menssagem);
       } else {

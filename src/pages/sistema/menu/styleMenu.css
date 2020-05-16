@@ -1,0 +1,51 @@
+.sidebar {
+    height: 100%;
+    width: 300px;
+    position: fixed;
+    background: #000000;
+    z-index: 1;
+}
+
+.sidebar .nav-link {
+    list-style: none;
+    padding: 15px 30px;
+    color: #ffffff;
+}
+
+.sidebar .nav-link:hover {
+    list-style: none;
+    padding: 15px 30px;
+    color: #ffffff;
+    background-color:#7159C6;
+    transition: all .2s linear;
+}
+
+.nav {
+    padding-top: 10px;
+}
+
+.icons {
+    font-size: 20px;
+    color: #ffffff;
+}
+
+.perfil {
+    padding-top: 20px;
+}
+
+.avatar {
+    width: 50px;
+    margin: 10px 10px;
+}
+
+.boas-vindas {
+    color: #ffffff;
+    margin-top: 50px;
+}
+
+.power {
+    font-size: 20px;
+    color: #e02041;
+    cursor: pointer;
+    margin-left: 40px;
+}

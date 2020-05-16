@@ -1,32 +1,32 @@
 import React, { Component } from 'react';
-import api from '../../service/api';
-import history from '../../service/history';
+import api from '../../../service/api';
+import history from '../../../service/history';
+import Menu from '../menu';
+import '../styleGlobalSistema.css';
 
-//import './style.css';
-
-class HomeSistema extends Component {
-    constructor(){
+class MeuPerfil extends Component {
+    constructor() {
         super();
-        this.state ={
+        this.state = {
             logged: false
         }
     };
 
-    componentDidMount(){
+    componentDidMount() {
         this.verifyToken();
     };
 
-    async verifyToken(){
+    async verifyToken() {
         const token = localStorage.getItem('Key_Andy');
         const id = localStorage.getItem('Key_Id');
-    
-        if(token !== null){
+
+        if (token !== null) {
             await api.get(`/verifyToken/${id}`, {
                 headers: {
                     "authorization": `Bearer ${token}`
                 }
             }).then((response) => {
-                if(response.data.status === 200) {
+                if (response.data.status === 200) {
                     this.setState({
                         logged: true
                     })
@@ -38,21 +38,30 @@ class HomeSistema extends Component {
                     });
                     history.push('/');
                 }
-            }).catch ((err) => {
+            }).catch((err) => {
                 console.log(err);
             });
-        }else{
+        } else {
             history.push('/');
         }
     }
 
     render() {
         return (
-            <h1>Ola</h1>
+            <div className="row">
+                <div className="col-md-2">
+                    <Menu />
+                </div>
+                <div className="col-md-10">
+                    <div className="corpo">
+                        <h1>Meu Perfil</h1>
+                    </div>
+                </div>
+            </div>
         )
     }
 }
 
-export default HomeSistema;
+export default MeuPerfil;
 
 
