@@ -15,7 +15,7 @@ class Servico extends Component {
             logged: false,
             servico: undefined,
             descricao: undefined,
-            valor: undefined,
+            preco: undefined,
             tempoEstimado: undefined,
             servicos: [],
             edit: [],
@@ -66,12 +66,11 @@ class Servico extends Component {
             const data = {
                 nome: this.refs.servico.value,
                 descricao: this.refs.descricao.value,
-                preco: this.refs.valor.value,
+                valor: this.refs.valor.value,
                 tempo: this.refs.tempoEstimado.value,
                 idEmpresa: 1
             }
-            console.log(data);
-            if (!data.nome || !data.descricao || !data.preco || !data.tempo) {
+            if (!data.nome || !data.descricao || !data.valor || !data.tempo) {
                 this.setState({
                     error: 'Favor preencher todos os campos.'
                 })
@@ -116,15 +115,14 @@ class Servico extends Component {
 
     async handleSubmitAlterar() {
         try {
-            const id = this.refs.id.value;
             const data = {
                 nome: this.refs.servico.value,
                 descricao: this.refs.descricao.value,
-                preco: this.refs.valor.value,
+                valor: this.refs.valor.value,
                 tempo: this.refs.tempoEstimado.value,
             }
             console.log(this.state.edit);
-            if (!data.nome || !data.descricao || !data.preco || !data.tempo) {
+            if (!data.nome || !data.descricao || !data.valor || !data.tempo) {
                 this.setState({
                     error: 'Favor preencher todos os campos.'
                 })
@@ -198,7 +196,7 @@ class Servico extends Component {
                                                     </div>
                                                     <div className="form-group col-md-6">
                                                         <label className="subTitulos" htmlFor="valor">Valor</label>
-                                                        <input type="text" className="form-control" id="valor" ref='valor' defaultValue={editServicos.valor} onChange={e => this.setState({ valor: e.target.value })} />
+                                                        <input type="text" className="form-control" id="valor" ref='valor' defaultValue={editServicos.preco} onChange={e => this.setState({ valor: e.target.value })} />
                                                     </div>
                                                     <div className="form-group col-md-6">
                                                         <label className="subTitulos" htmlFor="tempoEstimado">Tempo Estimado</label>
@@ -239,7 +237,7 @@ class Servico extends Component {
                                                     <tr key={servico._id}>
                                                         <td>{servico.nome}</td>
                                                         <td>{servico.descricao}</td>
-                                                        <td>{servico.valor.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}</td>
+                                                        <td>{servico.preco.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}</td>
                                                         <td>{servico.tempo}</td>
                                                         <td className="text-primary pencilTrash" onClick={() => this.editarServices(servico._id)}><FaPencilAlt /></td>
                                                         <td className="text-danger pencilTrash" onClick={() => this.excluirServices(servico._id)}><FaTrash /></td>
