@@ -8,13 +8,25 @@ import { FaPencilAlt, FaTrash } from 'react-icons/fa';
 class Servico extends Component {
     constructor() {
         super();
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleSubmitAlterar = this.handleSubmitAlterar.bind(this);
         this.state = {
-            logged: false
+            id: undefined,
+            logged: false,
+            servico: undefined,
+            descricao: undefined,
+            valor: undefined,
+            tempoEstimado: undefined,
+            servicos: [],
+            edit: [],
+            error: undefined,
+            success: undefined
         }
     };
 
     componentDidMount() {
         this.verifyToken();
+        this.loadServicos();
     };
 
 
@@ -48,7 +60,93 @@ class Servico extends Component {
         }
     }
 
+    async handleSubmit(e) {
+        e.preventDefault();
+        try {
+            const data = {
+                nome: this.refs.servico.value,
+                descricao: this.refs.descricao.value,
+                preco: this.refs.valor.value,
+                tempo: this.refs.tempoEstimado.value,
+                idEmpresa: 1
+            }
+            console.log(data);
+            if (!data.nome || !data.descricao || !data.preco || !data.tempo) {
+                this.setState({
+                    error: 'Favor preencher todos os campos.'
+                })
+            } else {
+                await api.post('/createService', data).then(response => {
+                    if (response.data.status === 200) {
+                        console.log(response.data);
+                        this.setState({
+                            success: response.data.mensagem
+                        })
+                        this.refs.servico.value = '';
+                        this.refs.descricao.value = '';
+                        this.refs.valor.value = '';
+                        this.refs.tempoEstimado.value = '';
+                        this.loadServicos();
+                    } else {
+                        this.setState({
+                            error: response.data.mensagem
+                        });
+                    }
+                })
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    loadServicos = async () => {
+        const response = await api.get('/showServices/1');
+        this.setState({ servicos: response.data.servicos });
+    }
+
+    editarServices = async (id) => {
+        const response = await api.get(`/showService/${id}`);
+        this.setState({ edit: response.data.service })
+    }
+
+    excluirServices = async (id) => {
+        await api.delete(`/deleteService/${id}`);
+        this.loadServicos();
+    }
+
+    async handleSubmitAlterar() {
+        try {
+            const id = this.refs.id.value;
+            const data = {
+                nome: this.refs.servico.value,
+                descricao: this.refs.descricao.value,
+                preco: this.refs.valor.value,
+                tempo: this.refs.tempoEstimado.value,
+            }
+            console.log(this.state.edit);
+            if (!data.nome || !data.descricao || !data.preco || !data.tempo) {
+                this.setState({
+                    error: 'Favor preencher todos os campos.'
+                })
+            } else {
+                await api.put(`/updateService/${this.state.edit._id}`, data).then(response => {
+                    if (response.data.status === 200) {
+                        this.loadServicos();
+                    } else {
+                        this.setState({
+                            error: response.data.mensagem
+                        });
+                    }
+                })
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     render() {
+        const servicos = this.state.servicos;
+        const editServicos = this.state.edit;
         return (
             <div className="row">
                 <div className="col-md-2">
@@ -60,28 +158,58 @@ class Servico extends Component {
                             <h3 className="title">Serviços</h3>
                             <div className="row">
                                 <div className="col-md-12">
-                                    <form>
-                                        <div className="form-row align-items-center justify-content-md-center">
-                                            <div className="form-group col-md-6">
-                                                <label className="subTitulos" htmlFor="servico">Serviço</label>
-                                                <input type="text" className="form-control" id="servico" />
-                                            </div>
-                                            <div className="form-group col-md-6">
-                                                <label className="subTitulos" htmlFor="descricao">Descrição</label>
-                                                <input type="text" className="form-control" id="descricao" />
-                                            </div>
-                                            <div className="form-group col-md-6">
-                                                <label className="subTitulos" htmlFor="valor">Valor</label>
-                                                <input type="number" className="form-control" id="valor" />
-                                            </div>
-                                            <div className="form-group col-md-6">
-                                                <label className="subTitulos" htmlFor="tempoEstimado">Tempo Estimado</label>
-                                                <input type="time" className="form-control" id="tempoEstimado" />
-                                            </div>
-                                        </div>
-                                        <button type="submit" className="btn btn-success botao">Cadastrar</button>
-                                        <button type="reset" className="btn btn-danger botao">Limpar</button>
-                                    </form>
+                                    {editServicos.length === 0 ?
+                                        (
+                                            <form onSubmit={this.handleSubmit}>
+                                                <div className="form-row align-items-center justify-content-md-center">
+                                                    <div className="form-group col-md-6">
+                                                        <label className="subTitulos" htmlFor="servico">Serviço</label>
+                                                        <input type="text" className="form-control" id="servico" ref='servico' />
+                                                    </div>
+                                                    <div className="form-group col-md-6">
+                                                        <label className="subTitulos" htmlFor="descricao">Descrição</label>
+                                                        <input type="text" className="form-control" id="descricao" ref='descricao' />
+                                                    </div>
+                                                    <div className="form-group col-md-6">
+                                                        <label className="subTitulos" htmlFor="valor">Valor</label>
+                                                        <input type="text" className="form-control" id="valor" ref='valor' />
+                                                    </div>
+                                                    <div className="form-group col-md-6">
+                                                        <label className="subTitulos" htmlFor="tempoEstimado">Tempo Estimado</label>
+                                                        <input type="time" className="form-control" id="tempoEstimado" ref='tempoEstimado' />
+                                                    </div>
+                                                </div>
+                                                <button type="submit" className="btn btn-success botao">Cadastrar</button>
+                                                <button type="reset" className="btn btn-danger botao">Limpar</button>
+                                            </form>
+                                        )
+                                        :
+                                        (
+                                            <form>
+                                                <div className="form-row align-items-center justify-content-md-center">
+                                                    <input type="hidden" className="form-control" id="id" ref='id' defaultValue={editServicos._id} onChange={e => this.setState({ id: e.target.value })} />
+                                                    <div className="form-group col-md-6">
+                                                        <label className="subTitulos" htmlFor="servico">Serviço</label>
+                                                        <input type="text" className="form-control" defaultValue={this.state.edit.nome} onChange={(e) => this.setState({ servico: e.target.value })} id="servico" ref='servico' />
+                                                    </div>
+                                                    <div className="form-group col-md-6">
+                                                        <label className="subTitulos" htmlFor="descricao">Descrição</label>
+                                                        <input type="text" className="form-control" id="descricao" ref='descricao' defaultValue={editServicos.descricao} onChange={(e) => this.setState({ descricao: e.target.value })} />
+                                                    </div>
+                                                    <div className="form-group col-md-6">
+                                                        <label className="subTitulos" htmlFor="valor">Valor</label>
+                                                        <input type="text" className="form-control" id="valor" ref='valor' defaultValue={editServicos.valor} onChange={e => this.setState({ valor: e.target.value })} />
+                                                    </div>
+                                                    <div className="form-group col-md-6">
+                                                        <label className="subTitulos" htmlFor="tempoEstimado">Tempo Estimado</label>
+                                                        <input type="time" className="form-control" id="tempoEstimado" ref='tempoEstimado' defaultValue={editServicos.tempo} onChange={e => this.setState({ tempoEstimado: e.target.value })} />
+                                                    </div>
+                                                </div>
+                                                <button type="submit" className="btn btn-success botao" onClick={this.handleSubmitAlterar}>Alterar</button>
+                                                <button type="reset" className="btn btn-danger botao">Limpar</button>
+                                            </form>
+                                        )
+                                    }
                                 </div>
                             </div>
                             <hr />
@@ -99,53 +227,33 @@ class Servico extends Component {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>Corte Masc</td>
-                                            <td>Corte de cabelo Masculino</td>
-                                            <td>R$ 30,00</td>
-                                            <td>00:30</td>
-                                            <td className="text-primary pencilTrash"><FaPencilAlt /></td>
-                                            <td className="text-danger pencilTrash"><FaTrash /></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Corte Fem Médio</td>
-                                            <td>Corte de cabelo Femino Médio</td>
-                                            <td>R$ 60,00</td>
-                                            <td>00:40</td>
-                                            <td className="text-primary pencilTrash"><FaPencilAlt /></td>
-                                            <td className="text-danger pencilTrash"><FaTrash /></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Corte Fem Curto</td>
-                                            <td>Corte de cabelo Feminino Curto</td>
-                                            <td>R$ 50,00</td>
-                                            <td>00:45</td>
-                                            <td className="text-primary pencilTrash"><FaPencilAlt /></td>
-                                            <td className="text-danger pencilTrash"><FaTrash /></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Corte Fem Long</td>
-                                            <td>Corte de cabelo Feminino Longo</td>
-                                            <td>R$ 70,00</td>
-                                            <td>00:45</td>
-                                            <td className="text-primary pencilTrash"><FaPencilAlt /></td>
-                                            <td className="text-danger pencilTrash"><FaTrash /></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Escova</td>
-                                            <td>Escova cabelo Feminino</td>
-                                            <td>R$ 100,00</td>
-                                            <td>01:00</td>
-                                            <td className="text-primary pencilTrash"><FaPencilAlt /></td>
-                                            <td className="text-danger pencilTrash"><FaTrash /></td>
-                                        </tr>
+                                        {servicos.length === 0 ?
+                                            (
+                                                <tr>
+                                                    <th>Não existe servicos cadastrado.</th>
+                                                </tr>
+                                            )
+                                            :
+                                            (
+                                                servicos.map(servico => (
+                                                    <tr key={servico._id}>
+                                                        <td>{servico.nome}</td>
+                                                        <td>{servico.descricao}</td>
+                                                        <td>{servico.valor.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}</td>
+                                                        <td>{servico.tempo}</td>
+                                                        <td className="text-primary pencilTrash" onClick={() => this.editarServices(servico._id)}><FaPencilAlt /></td>
+                                                        <td className="text-danger pencilTrash" onClick={() => this.excluirServices(servico._id)}><FaTrash /></td>
+                                                    </tr>
+                                                ))
+                                            )
+                                        }
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </div >
         )
     }
 }
