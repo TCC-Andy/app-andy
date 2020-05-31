@@ -228,7 +228,7 @@ class Servico extends Component {
                                         {servicos.length === 0 ?
                                             (
                                                 <tr>
-                                                    <th>Não existe servicos cadastrado.</th>
+                                                    <th>Não existe serviços cadastrado.</th>
                                                 </tr>
                                             )
                                             :
