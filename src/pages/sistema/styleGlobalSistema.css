@@ -5,7 +5,7 @@
     left: 0;
     top: 0;
     position: fixed;
-    overflow: hidden;
+    overflow: auto;
     padding-left: 310px;
 }
 
