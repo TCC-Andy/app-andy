@@ -112,8 +112,24 @@ class Servico extends Component {
         await api.delete(`/deleteService/${id}`);
         this.loadServicos();
     }
-
-    async handleSubmitAlterar() {
+    limpaCadastroFuncionario = async () => {
+        this.refs.nome.value = '';
+        this.refs.sobrenome.value = '';
+        this.refs.email.value = '';
+        this.refs.telefone.value = '';
+        this.refs.horaInicioTrabalho.value = '';
+        this.refs.horaAlmocoInicio.value = '';
+        this.refs.horaAlmocoFim.value = '';
+        this.refs.horaFimTrabalho.value = '';
+    }
+    limparTela() {
+        this.refs.servico.value = '';
+        this.refs.descricao.value = '';
+        this.refs.valor.value = '';
+        this.refs.tempoEstimado.value = ''
+    }
+    handleSubmitAlterar = async (e) => {
+        e.preventDefault()
         try {
             const data = {
                 nome: this.refs.servico.value,
@@ -121,7 +137,6 @@ class Servico extends Component {
                 valor: this.refs.valor.value,
                 tempo: this.refs.tempoEstimado.value,
             }
-            console.log(this.state.edit);
             if (!data.nome || !data.descricao || !data.valor || !data.tempo) {
                 this.setState({
                     error: 'Favor preencher todos os campos.'
@@ -129,6 +144,7 @@ class Servico extends Component {
             } else {
                 await api.put(`/updateService/${this.state.edit._id}`, data).then(response => {
                     if (response.data.status === 200) {
+                        this.limparTela();
                         this.loadServicos();
                     } else {
                         this.setState({
@@ -156,58 +172,32 @@ class Servico extends Component {
                             <h3 className="title">Serviços</h3>
                             <div className="row">
                                 <div className="col-md-12">
-                                    {editServicos.length === 0 ?
-                                        (
-                                            <form onSubmit={this.handleSubmit}>
-                                                <div className="form-row align-items-center justify-content-md-center">
-                                                    <div className="form-group col-md-6">
-                                                        <label className="subTitulos" htmlFor="servico">Serviço</label>
-                                                        <input type="text" className="form-control" id="servico" ref='servico' />
-                                                    </div>
-                                                    <div className="form-group col-md-6">
-                                                        <label className="subTitulos" htmlFor="descricao">Descrição</label>
-                                                        <input type="text" className="form-control" id="descricao" ref='descricao' />
-                                                    </div>
-                                                    <div className="form-group col-md-6">
-                                                        <label className="subTitulos" htmlFor="valor">Valor</label>
-                                                        <input type="text" className="form-control" id="valor" ref='valor' />
-                                                    </div>
-                                                    <div className="form-group col-md-6">
-                                                        <label className="subTitulos" htmlFor="tempoEstimado">Tempo Estimado</label>
-                                                        <input type="time" className="form-control" id="tempoEstimado" ref='tempoEstimado' />
-                                                    </div>
-                                                </div>
-                                                <button type="submit" className="btn btn-success botao">Cadastrar</button>
-                                                <button type="reset" className="btn btn-danger botao">Limpar</button>
-                                            </form>
-                                        )
-                                        :
-                                        (
-                                            <form>
-                                                <div className="form-row align-items-center justify-content-md-center">
-                                                    <input type="hidden" className="form-control" id="id" ref='id' defaultValue={editServicos._id} onChange={e => this.setState({ id: e.target.value })} />
-                                                    <div className="form-group col-md-6">
-                                                        <label className="subTitulos" htmlFor="servico">Serviço</label>
-                                                        <input type="text" className="form-control" defaultValue={this.state.edit.nome} onChange={(e) => this.setState({ servico: e.target.value })} id="servico" ref='servico' />
-                                                    </div>
-                                                    <div className="form-group col-md-6">
-                                                        <label className="subTitulos" htmlFor="descricao">Descrição</label>
-                                                        <input type="text" className="form-control" id="descricao" ref='descricao' defaultValue={editServicos.descricao} onChange={(e) => this.setState({ descricao: e.target.value })} />
-                                                    </div>
-                                                    <div className="form-group col-md-6">
-                                                        <label className="subTitulos" htmlFor="valor">Valor</label>
-                                                        <input type="text" className="form-control" id="valor" ref='valor' defaultValue={editServicos.preco} onChange={e => this.setState({ valor: e.target.value })} />
-                                                    </div>
-                                                    <div className="form-group col-md-6">
-                                                        <label className="subTitulos" htmlFor="tempoEstimado">Tempo Estimado</label>
-                                                        <input type="time" className="form-control" id="tempoEstimado" ref='tempoEstimado' defaultValue={editServicos.tempo} onChange={e => this.setState({ tempoEstimado: e.target.value })} />
-                                                    </div>
-                                                </div>
-                                                <button type="submit" className="btn btn-success botao" onClick={this.handleSubmitAlterar}>Alterar</button>
-                                                <button type="reset" className="btn btn-danger botao">Limpar</button>
-                                            </form>
-                                        )
-                                    }
+                                    <form onSubmit={this.handleSubmit}>
+                                        <div className="form-row align-items-center justify-content-md-center">
+                                            <div className="form-group col-md-6">
+                                                <label className="subTitulos" htmlFor="servico">Serviço</label>
+                                                <input type="text" className="form-control" id="servico" ref='servico' defaultValue={editServicos.length === 0 ? '' : editServicos.nome} />
+                                            </div>
+                                            <div className="form-group col-md-6">
+                                                <label className="subTitulos" htmlFor="descricao">Descrição</label>
+                                                <input type="text" className="form-control" id="descricao" ref='descricao' defaultValue={editServicos.length === 0 ? '' : editServicos.descricao} />
+                                            </div>
+                                            <div className="form-group col-md-6">
+                                                <label className="subTitulos" htmlFor="valor">Valor</label>
+                                                <input type="text" className="form-control" id="valor" ref='valor' defaultValue={editServicos.length === 0 ? '' : editServicos.preco} />
+                                            </div>
+                                            <div className="form-group col-md-6">
+                                                <label className="subTitulos" htmlFor="tempoEstimado">Tempo Estimado</label>
+                                                <input type="time" className="form-control" id="tempoEstimado" ref='tempoEstimado' defaultValue={editServicos.length === 0 ? '' : editServicos.tempo} />
+                                            </div>
+                                        </div>
+                                        {editServicos.length === 0 ?
+                                            <button type="submit" className="btn btn-success botao">Cadastrar</button>
+                                            :
+                                            <button type="submit" className="btn btn-success botao" onClick={(e) => this.handleSubmitAlterar(e)}>Alterar</button>
+                                        }
+                                        <button type="reset" className="btn btn-danger botao">Limpar</button>
+                                    </form>
                                 </div>
                             </div>
                             <hr />

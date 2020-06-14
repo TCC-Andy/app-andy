@@ -3,7 +3,7 @@ import api from '../../../service/api';
 import history from '../../../service/history';
 import Menu from '../menu/index';
 import '../styleGlobalSistema.css';
-import Select from 'react-select';
+import Select from 'react-select'
 import { FaPencilAlt, FaTrash } from 'react-icons/fa';
 
 class Funcionario extends Component {
@@ -11,6 +11,7 @@ class Funcionario extends Component {
         super();
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleSubmitServices = this.handleSubmitServices.bind(this);
+        this.handleSubmitAlterar = this.handleSubmitAlterar.bind(this);
         this.state = {
             logged: false,
             servicos: [],
@@ -62,6 +63,47 @@ class Funcionario extends Component {
                         this.setState({
                             success: response.data.mensagem
                         })
+                        this.loadFuncionarios();
+                        setTimeout(function () {
+                            carregaFuncao.limpaCadastroFuncionario();
+                        }, 1)
+                    } else {
+                        this.setState({
+                            error: response.data.mensagem
+                        });
+                    }
+                })
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    handleSubmitAlterar = async (e) => {
+        e.preventDefault();
+        try {
+            const data = {
+                nome: this.refs.nome.value,
+                sobrenome: this.refs.sobrenome.value,
+                email: this.refs.email.value,
+                telefone: this.refs.telefone.value,
+                idEmpresa: 1,
+                horaInicioTrabalho: this.refs.horaInicioTrabalho.value,
+                horaAlmocoInicio: this.refs.horaAlmocoInicio.value,
+                horaAlmocoFim: this.refs.horaAlmocoFim.value,
+                horaFimTrabalho: this.refs.horaFimTrabalho.value,
+                idServicos: this.state.idServicos,
+                servicosSelection: this.state.servicosSelection
+            }
+            console.log(data);
+            if (!data.nome || !data.sobrenome || !data.email || !data.horaInicioTrabalho || !data.horaAlmocoInicio || !data.horaAlmocoFim || !data.horaFimTrabalho || !data.servicosSelection) {
+                this.setState({
+                    error: 'Favor preencher todos os campos.'
+                })
+            } else {
+                await api.put(`/updateEmp/${this.state.editarFuncionarios._id}`, data).then(response => {
+                    const carregaFuncao = this;
+                    if (response.data.status === 200) {
                         this.loadFuncionarios();
                         setTimeout(function () {
                             carregaFuncao.limpaCadastroFuncionario();
@@ -160,9 +202,7 @@ class Funcionario extends Component {
     render() {
         const funcionarios = this.state.funcionarios;
         const alterarFuncionarios = this.state.editarFuncionarios;
-        console.log(alterarFuncionarios);
         return (
-
             <div className="row">
                 <div className="col-md-2">
                     <Menu />
@@ -210,9 +250,8 @@ class Funcionario extends Component {
                                             <div className="form-group col-md-12">
                                                 <label className="subTitulos" htmlFor="servicos">Serviços</label>
                                                 <Select
-                                                    defaultValue={alterarFuncionarios.length === 0 ? '' : console.log(alterarFuncionarios.servicosSelection.map((servicos, index) => [servicos[index]]))}
                                                     isMulti
-                                                    //onChange={this.handleSubmitServices}
+                                                    onChange={this.handleSubmitServices}
                                                     name="serviços"
                                                     options={this.state.servicos}
                                                     className="basic-multi-select"
@@ -221,7 +260,11 @@ class Funcionario extends Component {
                                                 />
                                             </div>
                                         </div>
-                                        <button type="submit" className="btn btn-success botao">Cadastrar</button>
+                                        {alterarFuncionarios.length === 0 ?
+                                            <button type="submit" className="btn btn-success botao">Cadastrar</button>
+                                            :
+                                            <button type="submit" className="btn btn-success botao" onClick={(e) => this.handleSubmitAlterar(e)}>Alterar</button>
+                                        }
                                         <button type="reset" className="btn btn-danger botao">Limpar</button>
                                     </form>
                                 </div>
