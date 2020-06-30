@@ -7,7 +7,7 @@ import Select from 'react-select'
 import { FaPencilAlt, FaTrash } from 'react-icons/fa';
 
 class Funcionario extends Component {
-    constructor() {
+    constructor () {
         super();
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleSubmitServices = this.handleSubmitServices.bind(this);
@@ -275,14 +275,14 @@ class Funcionario extends Component {
                                     <caption>Lista de Funcionários</caption>
                                     <thead className="bgHead">
                                         <tr>
-                                            <th>Nome</th>
-                                            <th>E-mail</th>
-                                            <th>Telefone</th>
-                                            <th>Inicio Trab.</th>
-                                            <th>Inicio Almoço.</th>
-                                            <th>Fim Almoço.</th>
-                                            <th>Fim Trab.</th>
-                                            <th>Serviços</th>
+                                            <th className="align-middle">Nome</th>
+                                            <th className="align-middle">E-mail</th>
+                                            <th className="align-middle">Telefone</th>
+                                            <th className="align-middle">Inicio Trab.</th>
+                                            <th className="align-middle">Inicio Almoço.</th>
+                                            <th className="align-middle">Fim Almoço.</th>
+                                            <th className="align-middle">Fim Trab.</th>
+                                            <th className="align-middle">Serviços</th>
                                             <th></th>
                                             <th></th>
                                         </tr>

@@ -3,18 +3,46 @@ import api from '../../../service/api';
 import history from '../../../service/history';
 import Menu from '../menu';
 import '../styleGlobalSistema.css';
+import avatar from '../../../assets/images/avatar.png';
+
 
 class MeuPerfil extends Component {
-    constructor() {
+    constructor () {
         super();
         this.state = {
-            logged: false
+            logged: false,
+            empresa: [],
+            usuario: []
         }
     };
 
     componentDidMount() {
         this.verifyToken();
+        this.carregarEmpresa();
+        this.carregarUsuario();
     };
+
+    carregarEmpresa = async () => {
+        //const idUsuario = localStorage.getItem('Key_Id');
+        const idUsuario = '1';
+        if (idUsuario) {
+            const empresa = await api.get(`/showCompanyUser/${idUsuario}`);
+            console.log(empresa);
+            this.setState({
+                empresa: empresa.data.emp
+            })
+        }
+
+    }
+    carregarUsuario = async () => {
+        const idUsuario = localStorage.getItem('Key_Id');
+        if (idUsuario) {
+            const usuario = await api.get(`/retrieveUser/${idUsuario}`);
+            this.setState({
+                usuario: usuario.data.usuario
+            })
+        }
+    }
 
     async verifyToken() {
         const token = localStorage.getItem('Key_Andy');
@@ -47,6 +75,8 @@ class MeuPerfil extends Component {
     }
 
     render() {
+        const empresa = this.state.empresa;
+        const usuario = this.state.usuario;
         return (
             <div className="row">
                 <div className="col-md-2">
@@ -54,7 +84,19 @@ class MeuPerfil extends Component {
                 </div>
                 <div className="col-md-10">
                     <div className="corpo">
-                        <h1>Meu Perfil</h1>
+                        <div className="container">
+                            <div className="row">
+                                <div className="usuarioProfile">
+                                    <div className="col-md-3">
+                                        <div className="imgUsuario">
+                                            <img className="imagemUsuario" src={avatar} alt="imagem do usuario" />
+                                        </div>
+                                        <span className="nomeSobrenome">{usuario.nome + ' ' + usuario.sobrenome}</span>
+                                    </div>
+                                    <div className="col-md-6"></div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
