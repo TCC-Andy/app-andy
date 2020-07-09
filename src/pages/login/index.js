@@ -6,7 +6,7 @@ import api from '../../service/api';
 import './style.css';
 
 class Login extends Component {
-  constructor() {
+  constructor () {
     super();
     this.handleSubmit = this.handleSubmit.bind(this);
 
@@ -24,12 +24,15 @@ class Login extends Component {
     };
     await api.post('/authenticateUser', data).then((response) => {
       if (response.data.status === 200) {
-        localStorage.setItem('Key_Andy', response.data.token);
-        localStorage.setItem('Key_Id', response.data.usuario._id);
-        setTimeout(function () {
-          history.push('/dashbords');
-        }, 1500);
-        return alert(response.data.menssagem);
+        api.get(`/showCompanyUser/${response.data.usuario._id}`).then(resp => {
+          localStorage.setItem('Key_Andy', response.data.token);
+          localStorage.setItem('Key_Id', response.data.usuario._id);
+          localStorage.setItem('Key_Id_Empresa', resp.data.emp._id);
+          setTimeout(function () {
+            history.push('/agenda');
+          }, 1500);
+
+        })
       } else {
         console.log('erro ao cadastrar usuario');
       }
@@ -59,7 +62,6 @@ class Login extends Component {
                       <input type="password" className="form-control" id="senha" ref="senha" />
                     </div>
                     <button type="submit" className="btn btn-success">Logar </button>
-                    <Link className="txt1" to="../cadastro"> Cadastro </Link>
                     <Link className="txt2" to="../forgoutPassword">Esqueceu sua Senha?</Link>
                   </form>
                 </div>

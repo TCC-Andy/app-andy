@@ -44,7 +44,7 @@ class Funcionario extends Component {
                 sobrenome: this.refs.sobrenome.value,
                 email: this.refs.email.value,
                 telefone: this.refs.telefone.value,
-                idEmpresa: 1,
+                idEmpresa: localStorage.getItem('Key_Id_Empresa'),
                 horaInicioTrabalho: this.refs.horaInicioTrabalho.value,
                 horaAlmocoInicio: this.refs.horaAlmocoInicio.value,
                 horaAlmocoFim: this.refs.horaAlmocoFim.value,
@@ -63,10 +63,11 @@ class Funcionario extends Component {
                         this.setState({
                             success: response.data.mensagem
                         })
-                        this.loadFuncionarios();
                         setTimeout(function () {
                             carregaFuncao.limpaCadastroFuncionario();
                         }, 1)
+                        window.location.reload();
+                        this.loadFuncionarios();
                     } else {
                         this.setState({
                             error: response.data.mensagem
@@ -87,7 +88,7 @@ class Funcionario extends Component {
                 sobrenome: this.refs.sobrenome.value,
                 email: this.refs.email.value,
                 telefone: this.refs.telefone.value,
-                idEmpresa: 1,
+                idEmpresa: localStorage.getItem('Key_Id_Empresa'),
                 horaInicioTrabalho: this.refs.horaInicioTrabalho.value,
                 horaAlmocoInicio: this.refs.horaAlmocoInicio.value,
                 horaAlmocoFim: this.refs.horaAlmocoFim.value,
@@ -95,7 +96,6 @@ class Funcionario extends Component {
                 idServicos: this.state.idServicos,
                 servicosSelection: this.state.servicosSelection
             }
-            console.log(data);
             if (!data.nome || !data.sobrenome || !data.email || !data.horaInicioTrabalho || !data.horaAlmocoInicio || !data.horaAlmocoFim || !data.horaFimTrabalho || !data.servicosSelection) {
                 this.setState({
                     error: 'Favor preencher todos os campos.'
@@ -104,10 +104,11 @@ class Funcionario extends Component {
                 await api.put(`/updateEmp/${this.state.editarFuncionarios._id}`, data).then(response => {
                     const carregaFuncao = this;
                     if (response.data.status === 200) {
-                        this.loadFuncionarios();
                         setTimeout(function () {
                             carregaFuncao.limpaCadastroFuncionario();
                         }, 1)
+                        window.location.reload();
+                        this.loadFuncionarios();
                     } else {
                         this.setState({
                             error: response.data.mensagem
@@ -143,7 +144,8 @@ class Funcionario extends Component {
     }
 
     loadServicos = async () => {
-        const response = await api.get('/showServices/1');
+        const idEmpresa = localStorage.getItem('Key_Id_Empresa');
+        const response = await api.get(`/showServices/${idEmpresa}`);
         let optionsServices = [];
         for (let i in response.data.servicos) {
             optionsServices.push({
@@ -155,7 +157,8 @@ class Funcionario extends Component {
     }
 
     loadFuncionarios = async () => {
-        const response = await api.get('/showEmps/1');
+        const idEmpresa = localStorage.getItem('Key_Id_Empresa');
+        const response = await api.get(`/showEmps/${idEmpresa}`);
         this.setState({ funcionarios: response.data.funcionarios });
     }
 
@@ -186,6 +189,7 @@ class Funcionario extends Component {
                 } else {
                     localStorage.removeItem('Key_Andy');
                     localStorage.removeItem('Key_Id');
+                    localStorage.removeItem('Key_Id_Empresa');
                     this.setState({
                         logged: false
                     });

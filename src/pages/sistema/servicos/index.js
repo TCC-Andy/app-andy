@@ -6,7 +6,7 @@ import '../styleGlobalSistema.css';
 import { FaPencilAlt, FaTrash } from 'react-icons/fa';
 
 class Servico extends Component {
-    constructor() {
+    constructor () {
         super();
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleSubmitAlterar = this.handleSubmitAlterar.bind(this);
@@ -47,6 +47,7 @@ class Servico extends Component {
                 } else {
                     localStorage.removeItem('Key_Andy');
                     localStorage.removeItem('Key_Id');
+                    localStorage.removeItem('Key_Id_Empresa');
                     this.setState({
                         logged: false
                     });
@@ -68,7 +69,7 @@ class Servico extends Component {
                 descricao: this.refs.descricao.value,
                 valor: this.refs.valor.value,
                 tempo: this.refs.tempoEstimado.value,
-                idEmpresa: 1
+                idEmpresa: localStorage.getItem('Key_Id_Empresa')
             }
             if (!data.nome || !data.descricao || !data.valor || !data.tempo) {
                 this.setState({
@@ -77,7 +78,6 @@ class Servico extends Component {
             } else {
                 await api.post('/createService', data).then(response => {
                     if (response.data.status === 200) {
-                        console.log(response.data);
                         this.setState({
                             success: response.data.mensagem
                         })
@@ -85,6 +85,7 @@ class Servico extends Component {
                         this.refs.descricao.value = '';
                         this.refs.valor.value = '';
                         this.refs.tempoEstimado.value = '';
+                        window.location.reload();
                         this.loadServicos();
                     } else {
                         this.setState({
@@ -99,7 +100,8 @@ class Servico extends Component {
     }
 
     loadServicos = async () => {
-        const response = await api.get('/showServices/1');
+        const idEmpresa = localStorage.getItem('Key_Id_Empresa');
+        const response = await api.get(`/showServices/${idEmpresa}`);
         this.setState({ servicos: response.data.servicos });
     }
 
@@ -145,6 +147,7 @@ class Servico extends Component {
                 await api.put(`/updateService/${this.state.edit._id}`, data).then(response => {
                     if (response.data.status === 200) {
                         this.limparTela();
+                        window.location.reload();
                         this.loadServicos();
                     } else {
                         this.setState({

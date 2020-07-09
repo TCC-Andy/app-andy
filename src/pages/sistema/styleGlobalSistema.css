@@ -9,6 +9,10 @@
     padding-left: 310px;
 }
 
+.subTitulosPesquisar {
+    color: #f0f0f5;
+}
+
 .botao {
     margin-right: 10px;
 }
@@ -33,25 +37,27 @@
 }
 
 .usuarioProfile {
-    display: flex;
-    background: #ffffff;
     width: 100%;
     height: auto;
-    margin-top: 50px;
+    margin-top: 5px;
 }
 
-.imagemUsuario {
-    width: 130px;
-    align-items: center;
-    justify-content: center;
-    margin-left: 40px;
-}
-
-.nomeSobrenome > span {
-    align-items: center;
-    justify-content: center;
-    margin-left: 40px;
-    font-size: 15px;
-    font-weight: bold;
+.mensage {
     color: #7159C6;
+    font-weight: bold;
+}
+
+.card-header {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+}
+
+.valorServico{
+    justify-content: space-between;
+    text-align: right;
+    padding-right: 4px;
+    color: #ffffff;
+    box-shadow: 2px 2px 1px rgba(0, 0, 0, 0.8);
+    font-weight: bold;
 }

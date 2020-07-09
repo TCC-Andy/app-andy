@@ -41,6 +41,14 @@
 .boas-vindas {
     color: #ffffff;
     margin-top: 50px;
+    margin-left: 30px;
+}
+
+.boas-vindas:hover {
+    color: #7159C6;
+    margin-top: 50px;
+    margin-left: 30px;
+    text-decoration: none;
 }
 
 .power {

@@ -7,7 +7,6 @@ import Login from '../pages/login/index';
 import Cadastro from '../pages/cadastro/index';
 import ForgoutPassword from '../pages/forgoutPassword/index';
 import ResetPassword from '../pages/resetPassword/index';
-import Dashbords from '../pages/sistema/dashbords';
 import Agenda from '../pages/sistema/agenda';
 import Funcionarios from '../pages/sistema/funcionarios';
 import Servicos from '../pages/sistema/servicos';
@@ -38,7 +37,6 @@ const Routes = () => {
             <Route path="/cadastro" component={Cadastro}></Route>
             <Route path="/forgoutPassword" component={ForgoutPassword}></Route>
             <Route path="/resetPassword/:token" component={ResetPassword}></Route>
-            <Route path="/dashbords" component={Dashbords} />
             <Route path="/agenda" component={Agenda} />
             <Route path="/funcionarios" component={Funcionarios} />
             <Route path="/servicos" component={Servicos} />
