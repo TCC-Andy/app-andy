@@ -22,19 +22,25 @@ class Login extends Component {
       email: this.refs.email.value,
       senha: this.refs.senha.value,
     };
-    await api.post('/authenticateUser', data).then((response) => {
+    await api.post('/authenticateUser', data).then(async (response) => {
       if (response.data.status === 200) {
-        api.get(`/showCompanyUser/${response.data.usuario._id}`).then(resp => {
-          localStorage.setItem('Key_Andy', response.data.token);
-          localStorage.setItem('Key_Id', response.data.usuario._id);
-          localStorage.setItem('Key_Id_Empresa', resp.data.emp._id);
-          setTimeout(function () {
+        const token = response.data.token;
+        const idUsuario = response.data.usuario._id;
+        const perfilUsuario = response.data.usuario.perfil;
+        await localStorage.setItem('Key_Andy', token);
+        await localStorage.setItem('Key_Id_Usuario', idUsuario);
+        await localStorage.setItem('Key_Perfil_Usuario', perfilUsuario);
+        if (perfilUsuario === 'administrador') {
+          history.push('/administrador/cadastroEmpresa');
+        } else {
+          api.get(`/showCompanyUser/${idUsuario}`).then(resp => {
+            const idEmpresa = resp.data.emp._id;
+            localStorage.setItem('Key_Id_Empresa', idEmpresa);
             history.push('/agenda');
-          }, 1500);
-
-        })
+          })
+        }
       } else {
-        console.log('erro ao cadastrar usuario');
+        console.log('erro ao fazer login');
       }
     }).catch((error) => {
       console.log(error);
@@ -43,7 +49,6 @@ class Login extends Component {
 
   render() {
     return (
-
       <div className="login">
         <Helmet title="Andy Services" />
         <div className="container-fluid">

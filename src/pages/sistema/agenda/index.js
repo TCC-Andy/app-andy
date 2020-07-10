@@ -64,7 +64,10 @@ class Agenda extends Component {
     loadAgendas = async () => {
         const idEmpresa = localStorage.getItem('Key_Id_Empresa');
         const now = new Date();
-        const dia = now.getDate();
+        let dia = now.getDate();
+        if (dia.toString().length === 1) {
+            dia = "0" + dia;
+        }
         let mes = now.getMonth() + 1;
         if (mes.toString().length === 1) {
             mes = "0" + mes;
@@ -118,9 +121,11 @@ class Agenda extends Component {
         e.preventDefault();
         const data = {
             idFuncionario: this.refs.funcionario.value,
-            dataAgenda: moment(this.refs.data.value).locale('pt-br').format('YYYY/MM/D')
+            dataAgenda: moment(this.refs.data.value).format('YYYY/MM/DD')
         }
+        console.log(data);
         await api.post('/showScheduleByDateEmp', data).then(response => {
+            console.log(response);
             if (response.data.status === 200) {
                 this.setState({
                     carregando: true,

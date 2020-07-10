@@ -98,7 +98,7 @@ class MeuPerfil extends Component {
     }
 
     carregarUsuario = async () => {
-        const idUsuario = localStorage.getItem('Key_Id');
+        const idUsuario = localStorage.getItem('Key_Id_Usuario');
         if (idUsuario) {
             const usuario = await api.get(`/retrieveUser/${idUsuario}`);
             this.setState({
