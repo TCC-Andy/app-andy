@@ -87,7 +87,7 @@ class MeuPerfil extends Component {
     }
 
     carregarEmpresa = async () => {
-        const idUsuario = localStorage.getItem('Key_Id');
+        const idUsuario = localStorage.getItem('Key_Id_Usuario');
         if (idUsuario) {
             const empresa = await api.get(`/showCompanyUser/${idUsuario}`);
             this.setState({
@@ -142,6 +142,7 @@ class MeuPerfil extends Component {
         const usuario = this.state.usuario;
         const mensagemEmpresa = this.state.mensagemEmpresa;
         const mensagemUsuario = this.state.mensagemUsuario;
+        console.log(empresa);
         return (
             <div className="row">
                 <div className="col-md-2">
