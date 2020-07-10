@@ -13,6 +13,8 @@ class Login extends Component {
     this.state = {
       email: undefined,
       senha: undefined,
+      mensagem: undefined,
+      mensagemError: undefined
     };
   };
 
@@ -31,16 +33,39 @@ class Login extends Component {
         await localStorage.setItem('Key_Id_Usuario', idUsuario);
         await localStorage.setItem('Key_Perfil_Usuario', perfilUsuario);
         if (perfilUsuario === 'administrador') {
-          history.push('/administrador/cadastroEmpresa');
+          this.setState({
+            mensagem: 'Usuário logado com sucesso.'
+          })
+          setTimeout(() => {
+            this.setState({
+              mensagem: undefined
+            })
+            history.push('/administrador/cadastroEmpresa');
+          }, 1000)
         } else {
           api.get(`/showCompanyUser/${idUsuario}`).then(resp => {
             const idEmpresa = resp.data.emp._id;
             localStorage.setItem('Key_Id_Empresa', idEmpresa);
-            history.push('/agenda');
+            this.setState({
+              mensagem: 'Usuário logado com sucesso.'
+            })
+            setTimeout(() => {
+              this.setState({
+                mensagem: undefined
+              })
+              history.push('/agenda');
+            }, 1500)
           })
         }
-      } else {
-        console.log('erro ao fazer login');
+      } else if (response.data.status === 400) {
+        this.setState({
+          mensagemError: 'E-mail ou Senha incorreto(s).'
+        })
+        setTimeout(() => {
+          this.setState({
+            mensagemError: undefined
+          })
+        }, 1500)
       }
     }).catch((error) => {
       console.log(error);
@@ -48,6 +73,8 @@ class Login extends Component {
   };
 
   render() {
+    const mensagem = this.state.mensagem;
+    const mensagemError = this.state.mensagemError;
     return (
       <div className="login">
         <Helmet title="Andy Services" />
@@ -57,6 +84,16 @@ class Login extends Component {
             <div className="col-md-4 teste">
               <div className="card bg-andy">
                 <div className="card-body">
+                  {mensagem === undefined ? '' :
+                    <div className="alert alert-success" role="alert">
+                      {mensagem}
+                    </div>
+                  }
+                  {mensagemError === undefined ? '' :
+                      <div className="alert alert-danger" role="alert">
+                        {mensagemError}
+                      </div>
+                    }
                   <form onSubmit={this.handleSubmit}>
                     <div className="form-group">
                       <label htmlFor="email">E-mail</label>

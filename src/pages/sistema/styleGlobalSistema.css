@@ -32,7 +32,7 @@
     color: #ffffff;
 }
 
-.pencilTrash{
+.pencilAlt, .pencilTrash{
     cursor: pointer;
 }
 

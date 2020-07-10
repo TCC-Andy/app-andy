@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import Menu from '../menu';
-import { FaPencilAlt, FaTrash } from 'react-icons/fa';
+import { FaTrash } from 'react-icons/fa';
 import api from '../../../service/api';
 import history from '../../../service/history';
+import '../styleGlobalSistema.css';
 
 class CadastroEmpresa extends Component {
     constructor () {
@@ -13,9 +14,34 @@ class CadastroEmpresa extends Component {
             mensagem: undefined,
             mensagemCadastro: undefined,
             usuario: [],
+            usuariosAll: [],
+            empresasAll: []
         }
     };
 
+    componentDidMount() {
+        this.verifyToken();
+        this.carregarUsuarios();
+        this.carregarEmpresas();
+    }
+
+    carregarUsuarios = async () => {
+        const usuarios = await api.get('/showUsers');
+        const usuario = usuarios.data.filter((usuario) => {
+            return usuario.perfil !== 'administrador';
+        })
+        this.setState({
+            usuariosAll: usuario
+        })
+    }
+
+    carregarEmpresas = async () => {
+        const empresas = await api.get('/showCompanies');
+        console.log(empresas);
+        this.setState({
+            empresasAll: empresas.data
+        })
+    }
 
     verifyToken = async () => {
         const token = localStorage.getItem('Key_Andy');
@@ -96,9 +122,26 @@ class CadastroEmpresa extends Component {
         }
     };
 
+    deletarEmpresa = async (id) => {
+        await api.delete(`/deleteCompany/${id}`).then(response => {
+            if (response.data.status === 200) {
+                this.setState({
+                    mensagemCadastro: response.data.mensagem
+                })
+                setTimeout(() => {
+                    this.setState({
+                        mensagemCadastro: [],
+                    })
+                    window.location.reload();
+                }, 1500)
+            }
+        })
+    }
+
     handleSubmitEmpresa = async (e) => {
         e.preventDefault();
         try {
+            const nomeUsuario = this.refs.nomeUsuario.value;
             const nome = this.refs.razaoSocial.value;
             const nomeFantasia = this.refs.nomeFantasia.value;
             const CNPJ = this.refs.cnpj.value;
@@ -113,7 +156,7 @@ class CadastroEmpresa extends Component {
             const complemento = this.refs.complemento.value;
             const estado = this.refs.estado.value;
             const telefone = this.refs.telefone.value;
-            if (!nome || !nomeFantasia || !CNPJ || !idEmpresario || !categoria || !numero || !descricao || !rua || !bairro || !cidade || !cep || !complemento || !estado || !telefone) {
+            if (!nomeUsuario || !nome || !nomeFantasia || !CNPJ || !idEmpresario || !categoria || !numero || !descricao || !rua || !bairro || !cidade || !cep || !complemento || !estado || !telefone) {
                 this.setState({
                     mensagem: 'Todos os campos deverá ser preenchido.'
                 });
@@ -124,6 +167,7 @@ class CadastroEmpresa extends Component {
                 }, 1000);
             } else {
                 const data = {
+                    nomeUsuario: nomeUsuario,
                     nome: nome,
                     nomeFantasia: nomeFantasia,
                     CNPJ: CNPJ,
@@ -175,10 +219,15 @@ class CadastroEmpresa extends Component {
             console.log(error);
         }
     }
+
+
+
     render() {
         const mensagem = this.state.mensagem;
         const mensagemCadastro = this.state.mensagemCadastro;
         const usuario = this.state.usuario;
+        const usuariosAll = this.state.usuariosAll;
+        const empresasAll = this.state.empresasAll;
         return (
             <div className="row">
                 <div className="col-md-2">
@@ -237,9 +286,10 @@ class CadastroEmpresa extends Component {
                                         (
                                             <form onSubmit={this.handleSubmitEmpresa}>
                                                 <div className="form-row align-items-center justify-content-md-center">
+                                                    <input type="hidden" className="form-control" id="idUsuario" ref='idUsuario' value={usuario._id} />
                                                     <div className="form-group col-md-3">
-                                                        <label className="subTitulos" htmlFor="idUsuario">Usuário</label>
-                                                        <input type="text" className="form-control" id="idUsuario" ref='idUsuario' value={usuario._id} readOnly />
+                                                        <label className="subTitulos" htmlFor="nomeUsuario">Usuário</label>
+                                                        <input type="text" className="form-control" id="nomeUsuario" ref='nomeUsuario' value={usuario.nome} readOnly />
                                                     </div>
                                                     <div className="form-group col-md-2">
                                                         <label className="subTitulos" htmlFor="cnpj">CNPJ</label>
@@ -299,33 +349,33 @@ class CadastroEmpresa extends Component {
                                                         <label className="subTitulos" htmlFor="estado">Estado</label>
                                                         <select className="form-control" id="estado" ref='estado'>
                                                             <option selected>Selecione um Estado.</option>
-                                                            <option value="AC">AC</option>
-                                                            <option value="AL">AL</option>
-                                                            <option value="AP">AP</option>
-                                                            <option value="AM">AM</option>
-                                                            <option value="BA">BA</option>
-                                                            <option value="CE">CE</option>
-                                                            <option value="DF">DF</option>
-                                                            <option value="ES">ES</option>
-                                                            <option value="GO">GO</option>
-                                                            <option value="MA">MA</option>
-                                                            <option value="MT">MT</option>
-                                                            <option value="MS">MS</option>
-                                                            <option value="MG">MG</option>
-                                                            <option value="PA">PA</option>
-                                                            <option value="PB">PB</option>
-                                                            <option value="PR">PR</option>
-                                                            <option value="PE">PE</option>
-                                                            <option value="PI">PI</option>
-                                                            <option value="RJ">RJ</option>
-                                                            <option value="RN">RN</option>
-                                                            <option value="RS">RS</option>
-                                                            <option value="RO">RO</option>
-                                                            <option value="RR">RR</option>
-                                                            <option value="SC">SC</option>
-                                                            <option value="SP">SP</option>
-                                                            <option value="SE">SE</option>
-                                                            <option value="TO">TO</option>
+                                                            <option value="Acre">Acre</option>
+                                                            <option value="Alagoas">Alagoas</option>
+                                                            <option value="Amapá">Amapá</option>
+                                                            <option value="Amazonas">Amazonas</option>
+                                                            <option value="Bahia">Bahia</option>
+                                                            <option value="Ceará">Ceará</option>
+                                                            <option value="Distrito Federal">Distrito Federal</option>
+                                                            <option value="Espirito Santo">Espirito Santo</option>
+                                                            <option value="Goiás">Goiás</option>
+                                                            <option value="Maranhão">Maranhão</option>
+                                                            <option value="Mato Grosso">Mato Grosso</option>
+                                                            <option value="Mato Grosso do Sul">Mato Grosso do Sul</option>
+                                                            <option value="Minas Gerais">Minas Gerais</option>
+                                                            <option value="Pará">Pará</option>
+                                                            <option value="Paraiba">Paraiba</option>
+                                                            <option value="Paraná">Paraná</option>
+                                                            <option value="Pernambuco">Pernambuco</option>
+                                                            <option value="Piauí">Piauí</option>
+                                                            <option value="Rio de Janeiro">Rio de Janeiro</option>
+                                                            <option value="Rio Grande do Norte">Rio Grande do Norte</option>
+                                                            <option value="Rio Grande do Sul">Rio Grande do Sul</option>
+                                                            <option value="Rondônia">Rondônia</option>
+                                                            <option value="Roraima">Roraima</option>
+                                                            <option value="Santa Catarina">Santa Catarina</option>
+                                                            <option value="São Paulo">São Paulo</option>
+                                                            <option value="Sergipe">Sergipe</option>
+                                                            <option value="Tocantins">Tocantins</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -337,25 +387,62 @@ class CadastroEmpresa extends Component {
                                 </div>
                             </div>
                             <hr />
-                            <div className="table-responsive-md">
-                                <table className="table table-sm table-hover text-center align-middle">
-                                    <caption>Lista de Usuários</caption>
-                                    <thead className="bgHead">
-                                        <tr>
-                                            <th className="align-middle">Nome</th>
-                                            <th></th>
-                                            <th></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td className="align-middle"></td>
-                                            <td className="text-primary pencilTrash align-middle"><FaPencilAlt /></td>
-                                            <td className="text-danger pencilTrash align-middle"><FaTrash /></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                            {usuariosAll.length === 0 ? '' :
+                                <div className="table-responsive-md">
+                                    <table className="table table-sm table-hover text-center align-middle table-bordered">
+                                        <caption>Lista de Usuários</caption>
+                                        <thead className="bgHead">
+                                            <tr>
+                                                <th className="align-middle">Nome Completo</th>
+                                                <th className="align-middle">E-mail</th>
+                                                <th className="align-middle">Perfil</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {usuariosAll.map(usuario => (
+                                                <tr>
+                                                    <td className="align-middle">{usuario.nome + ' ' + usuario.sobrenome}</td>
+                                                    <td className="align-middle">{usuario.email}</td>
+                                                    <td className="align-middle">{usuario.perfil}</td>
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            }
+                            <br />
+                            {empresasAll.length === 0 ? '' :
+                                <div className="table-responsive-md">
+                                    <table className="table table-sm table-hover text-center align-middle table-bordered">
+                                        <caption>Lista de Empresas</caption>
+                                        <thead className="bgHead">
+                                            <tr>
+                                                <th className="align-middle">Razão Social</th>
+                                                <th className="align-middle">CNPJ</th>
+                                                <th className="align-middle">Telefone</th>
+                                                <th className="align-middle">Categoria</th>
+                                                <th className="align-middle">cidade</th>
+                                                <th className="align-middle">Estado</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {empresasAll.map(empresa => (
+                                                <tr>
+                                                    <td className="align-middle">{empresa.nome}</td>
+                                                    <td className="align-middle">{empresa.CNPJ}</td>
+                                                    <td className="align-middle">{empresa.telefone}</td>
+                                                    <td className="align-middle">{empresa.categoria}</td>
+                                                    <td className="align-middle">{empresa.cidade}</td>
+                                                    <td className="align-middle">{empresa.estado}</td>
+                                                    <td className="text-danger pencilTrash align-middle" onClick={() => { if (window.confirm(`Deseja DELETAR mesmo a Empresa ${empresa.nome}? Fazendo isso irá DELETAR todos seus usuários, Funcionários e Serviços cadastrado para empresa.`)) { this.deletarEmpresa(empresa._id) } }}><FaTrash /></td>
+                                                </tr>
+                                            ))
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            }
                         </div>
                     </div>
                 </div>

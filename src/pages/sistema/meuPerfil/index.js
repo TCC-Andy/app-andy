@@ -14,14 +14,14 @@ class MeuPerfil extends Component {
             empresa: [],
             usuario: [],
             mensagemEmpresa: undefined,
-            mensagemUsuario: undefined,
+            mensagemUsuario: undefined
         }
     };
 
     componentDidMount() {
         this.verifyToken();
-        this.carregarEmpresa();
         this.carregarUsuario();
+        this.carregarEmpresa();
     };
 
     handleSubmitAlterarUsuario = async (e) => {
@@ -142,7 +142,6 @@ class MeuPerfil extends Component {
         const usuario = this.state.usuario;
         const mensagemEmpresa = this.state.mensagemEmpresa;
         const mensagemUsuario = this.state.mensagemUsuario;
-        console.log(empresa);
         return (
             <div className="row">
                 <div className="col-md-2">
@@ -153,92 +152,131 @@ class MeuPerfil extends Component {
                         <div className="container">
                             <div className="row">
                                 <div className="usuarioProfile">
-                                    <form onSubmit={this.handleSubmitAlterarUsuario}>
-                                        <div className="row">
-                                            <div className="col-md-12">
-                                                {mensagemUsuario === undefined ?
-                                                    <h4 className="text-center">Usuário</h4>
-                                                    :
-                                                    <div class="alert alert-success" role="alert">
-                                                        {mensagemUsuario}
+                                    {usuario.perfil === 'administrador' ?
+                                        <>
+                                            <form onSubmit={this.handleSubmitAlterarUsuario}>
+                                                <div className="row">
+                                                    <div className="col-md-12">
+                                                        {mensagemUsuario === undefined ?
+                                                            <h4 className="text-center">Usuário</h4>
+                                                            :
+                                                            <div class="alert alert-success" role="alert">
+                                                                {mensagemUsuario}
+                                                            </div>
+                                                        }
                                                     </div>
-                                                }
-                                            </div>
-                                            <div className="form-group col-md-6">
-                                                <label className="subTitulos" htmlFor="nome">Nome:</label>
-                                                <input type="text" className="form-control" id="nome" ref="nome" defaultValue={usuario.nome} />
-                                            </div>
-                                            <div className="form-group col-md-6">
-                                                <label className="subTitulos" htmlFor="sobreNome">Sobrenome:</label>
-                                                <input type="text" className="form-control" id="sobreNome" ref="sobreNome" defaultValue={usuario.sobrenome} />
-                                            </div>
-                                            <div className="form-group col-md-6">
-                                                <label className="subTitulos" htmlFor="email">E-mail:</label>
-                                                <input type="email" className="form-control" id="email" ref="email" defaultValue={usuario.email} />
-                                            </div>
-                                            <div className="form-group col-md-6">
-                                                <label className="subTitulos" htmlFor="email">Senha: <em className="mensage">Digite sua senha para confirmar a alteração.</em> </label>
-                                                <input type="password" className="form-control" id="senha" ref="senha" />
-                                            </div>
-                                            <div className="form-group col-md-6">
+                                                    <div className="form-group col-md-6">
+                                                        <label className="subTitulos" htmlFor="nome">Nome:</label>
+                                                        <input type="text" className="form-control" id="nome" ref="nome" defaultValue={usuario.nome} />
+                                                    </div>
+                                                    <div className="form-group col-md-6">
+                                                        <label className="subTitulos" htmlFor="sobreNome">Sobrenome:</label>
+                                                        <input type="text" className="form-control" id="sobreNome" ref="sobreNome" defaultValue={usuario.sobrenome} />
+                                                    </div>
+                                                    <div className="form-group col-md-6">
+                                                        <label className="subTitulos" htmlFor="email">E-mail:</label>
+                                                        <input type="email" className="form-control" id="email" ref="email" defaultValue={usuario.email} />
+                                                    </div>
+                                                    <div className="form-group col-md-6">
+                                                        <label className="subTitulos" htmlFor="email">Senha: <em className="mensage">Digite sua senha para confirmar a alteração.</em> </label>
+                                                        <input type="password" className="form-control" id="senha" ref="senha" />
+                                                    </div>
+                                                    <div className="form-group col-md-6">
+                                                        <button type="submit" className="btn btn-primary">Alterar</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </>
+                                        :
+                                        <>
+                                            <form onSubmit={this.handleSubmitAlterarUsuario}>
+                                                <div className="row">
+                                                    <div className="col-md-12">
+                                                        {mensagemUsuario === undefined ?
+                                                            <h4 className="text-center">Usuário</h4>
+                                                            :
+                                                            <div class="alert alert-success" role="alert">
+                                                                {mensagemUsuario}
+                                                            </div>
+                                                        }
+                                                    </div>
+                                                    <div className="form-group col-md-6">
+                                                        <label className="subTitulos" htmlFor="nome">Nome:</label>
+                                                        <input type="text" className="form-control" id="nome" ref="nome" defaultValue={usuario.nome} />
+                                                    </div>
+                                                    <div className="form-group col-md-6">
+                                                        <label className="subTitulos" htmlFor="sobreNome">Sobrenome:</label>
+                                                        <input type="text" className="form-control" id="sobreNome" ref="sobreNome" defaultValue={usuario.sobrenome} />
+                                                    </div>
+                                                    <div className="form-group col-md-6">
+                                                        <label className="subTitulos" htmlFor="email">E-mail:</label>
+                                                        <input type="email" className="form-control" id="email" ref="email" defaultValue={usuario.email} />
+                                                    </div>
+                                                    <div className="form-group col-md-6">
+                                                        <label className="subTitulos" htmlFor="email">Senha: <em className="mensage">Digite sua senha para confirmar a alteração.</em> </label>
+                                                        <input type="password" className="form-control" id="senha" ref="senha" />
+                                                    </div>
+                                                    <div className="form-group col-md-6">
+                                                        <button type="submit" className="btn btn-primary">Alterar</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                            <form onSubmit={this.handleSubmitAlterarEmpresa}>
+                                                <div className="row">
+                                                    <div className="col-md-12">
+                                                        {mensagemEmpresa === undefined ?
+                                                            <h4 className="text-center">Empresa</h4>
+                                                            :
+                                                            <div class="alert alert-success" role="alert">
+                                                                {mensagemEmpresa}
+                                                            </div>
+                                                        }
+                                                    </div>
+                                                    <div className="form-group col-md-6">
+                                                        <label className="subTitulos" htmlFor="nome">Nome:</label>
+                                                        <input type="text" className="form-control" id="nomeEmpresa" ref="nomeEmpresa" defaultValue={empresa.nome} />
+                                                    </div>
+                                                    <div className="form-group col-md-6">
+                                                        <label className="subTitulos" htmlFor="nomeFantasia">Nome Fantasia:</label>
+                                                        <input type="text" className="form-control" id="nomeFantasia" ref="nomeFantasia" defaultValue={empresa.nomeFantasia} />
+                                                    </div>
+                                                    <div className="form-group col-md-3">
+                                                        <label className="subTitulos" htmlFor="cep">CEP:</label>
+                                                        <input type="text" className="form-control" id="cep" ref="cep" defaultValue={empresa.cep} />
+                                                    </div>
+                                                    <div className="form-group col-md-7">
+                                                        <label className="subTitulos" htmlFor="rua">Rua:</label>
+                                                        <input type="text" className="form-control" id="rua" ref="rua" defaultValue={empresa.rua} />
+                                                    </div>
+                                                    <div className="form-group col-md-2">
+                                                        <label className="subTitulos" htmlFor="numero">Número:</label>
+                                                        <input type="number" className="form-control" id="numero" ref="numero" defaultValue={empresa.numero} />
+                                                    </div>
+                                                    <div className="form-group col-md-6">
+                                                        <label className="subTitulos" htmlFor="complento">Complemento:</label>
+                                                        <input type="text" className="form-control" id="complemento" ref="complemento" defaultValue={empresa.complemento} />
+                                                    </div>
+                                                    <div className="form-group col-md-3">
+                                                        <label className="subTitulos" htmlFor="bairro">Bairro:</label>
+                                                        <input type="text" className="form-control" id="bairro" ref="bairro" defaultValue={empresa.bairro} />
+                                                    </div>
+                                                    <div className="form-group col-md-3">
+                                                        <label className="subTitulos" htmlFor="telefone">Telefone:</label>
+                                                        <input type="text" className="form-control" id="telefone" ref="telefone" defaultValue={empresa.telefone} />
+                                                    </div>
+                                                    <div className="form-group col-md-3">
+                                                        <label className="subTitulos" htmlFor="bairro">Cidade:</label>
+                                                        <input type="text" className="form-control" id="cidade" ref="cidade" defaultValue={empresa.cidade} />
+                                                    </div>
+                                                    <div className="form-group col-md-9">
+                                                        <label className="subTitulos" htmlFor="descricao">Descrição:</label>
+                                                        <input type="text" className="form-control" id="descricao" ref="descricao" defaultValue={empresa.descricao} />
+                                                    </div>
+                                                </div>
                                                 <button type="submit" className="btn btn-primary">Alterar</button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                    <form onSubmit={this.handleSubmitAlterarEmpresa}>
-                                        <div className="row">
-                                            <div className="col-md-12">
-                                                {mensagemEmpresa === undefined ?
-                                                    <h4 className="text-center">Empresa</h4>
-                                                    :
-                                                    <div class="alert alert-success" role="alert">
-                                                        {mensagemEmpresa}
-                                                    </div>
-                                                }
-                                            </div>
-                                            <div className="form-group col-md-6">
-                                                <label className="subTitulos" htmlFor="nome">Nome:</label>
-                                                <input type="text" className="form-control" id="nomeEmpresa" ref="nomeEmpresa" defaultValue={empresa.nome} />
-                                            </div>
-                                            <div className="form-group col-md-6">
-                                                <label className="subTitulos" htmlFor="nomeFantasia">Nome Fantasia:</label>
-                                                <input type="text" className="form-control" id="nomeFantasia" ref="nomeFantasia" defaultValue={empresa.nomeFantasia} />
-                                            </div>
-                                            <div className="form-group col-md-3">
-                                                <label className="subTitulos" htmlFor="cep">CEP:</label>
-                                                <input type="text" className="form-control" id="cep" ref="cep" defaultValue={empresa.cep} />
-                                            </div>
-                                            <div className="form-group col-md-7">
-                                                <label className="subTitulos" htmlFor="rua">Rua:</label>
-                                                <input type="text" className="form-control" id="rua" ref="rua" defaultValue={empresa.rua} />
-                                            </div>
-                                            <div className="form-group col-md-2">
-                                                <label className="subTitulos" htmlFor="numero">Número:</label>
-                                                <input type="number" className="form-control" id="numero" ref="numero" defaultValue={empresa.numero} />
-                                            </div>
-                                            <div className="form-group col-md-6">
-                                                <label className="subTitulos" htmlFor="complento">Complemento:</label>
-                                                <input type="text" className="form-control" id="complemento" ref="complemento" defaultValue={empresa.complemento} />
-                                            </div>
-                                            <div className="form-group col-md-3">
-                                                <label className="subTitulos" htmlFor="bairro">Bairro:</label>
-                                                <input type="text" className="form-control" id="bairro" ref="bairro" defaultValue={empresa.bairro} />
-                                            </div>
-                                            <div className="form-group col-md-3">
-                                                <label className="subTitulos" htmlFor="telefone">Telefone:</label>
-                                                <input type="text" className="form-control" id="telefone" ref="telefone" defaultValue={empresa.telefone} />
-                                            </div>
-                                            <div className="form-group col-md-3">
-                                                <label className="subTitulos" htmlFor="bairro">Cidade:</label>
-                                                <input type="text" className="form-control" id="cidade" ref="cidade" defaultValue={empresa.cidade} />
-                                            </div>
-                                            <div className="form-group col-md-9">
-                                                <label className="subTitulos" htmlFor="descricao">Descrição:</label>
-                                                <input type="text" className="form-control" id="descricao" ref="descricao" defaultValue={empresa.descricao} />
-                                            </div>
-                                        </div>
-                                        <button type="submit" className="btn btn-primary">Alterar</button>
-                                    </form>
+                                            </form>
+                                        </>
+                                    }
                                 </div>
                             </div>
                         </div>
