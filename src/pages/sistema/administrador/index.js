@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Menu from '../menu';
 import { FaPencilAlt, FaTrash } from 'react-icons/fa';
 import api from '../../../service/api';
+import history from '../../../service/history';
 
 class CadastroEmpresa extends Component {
     constructor () {
@@ -14,6 +15,37 @@ class CadastroEmpresa extends Component {
             usuario: [],
         }
     };
+
+
+    verifyToken = async () => {
+        const token = localStorage.getItem('Key_Andy');
+        const id = localStorage.getItem('Key_Id_Usuario');
+
+        if (token !== null) {
+            await api.get(`/verifyToken/${id}`, {
+                headers: {
+                    "authorization": `Bearer ${token}`
+                }
+            }).then((response) => {
+                if (response.data.status === 200) {
+                    this.setState({
+                        logged: true
+                    })
+                } else {
+                    localStorage.removeItem('Key_Andy');
+                    localStorage.removeItem('Key_Id_Usuario');
+                    this.setState({
+                        logged: false
+                    });
+                    history.push('/');
+                }
+            }).catch((err) => {
+                console.log(err);
+            });
+        } else {
+            history.push('/');
+        }
+    }
 
     handleSubmitUsuario = async (e) => {
         e.preventDefault();
@@ -118,7 +150,7 @@ class CadastroEmpresa extends Component {
                             });
                             window.location.reload();
                         }, 1000)
-                    } else if(response.data.status === 500) {
+                    } else if (response.data.status === 500) {
                         this.setState({
                             mensagem: response.data.mensagem
                         })
@@ -127,7 +159,7 @@ class CadastroEmpresa extends Component {
                                 mensagem: undefined,
                             })
                         }, 1000)
-                    } else if(response.data.status === 400) {
+                    } else if (response.data.status === 400) {
                         this.setState({
                             mensagem: response.data.mensagem
                         })

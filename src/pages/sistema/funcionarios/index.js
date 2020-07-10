@@ -172,9 +172,9 @@ class Funcionario extends Component {
         this.setState({ editarFuncionarios: response.data.func })
     }
 
-    async verifyToken() {
+    verifyToken = async () => {
         const token = localStorage.getItem('Key_Andy');
-        const id = localStorage.getItem('Key_Id');
+        const id = localStorage.getItem('Key_Id_Usuario');
 
         if (token !== null) {
             await api.get(`/verifyToken/${id}`, {
@@ -188,8 +188,7 @@ class Funcionario extends Component {
                     })
                 } else {
                     localStorage.removeItem('Key_Andy');
-                    localStorage.removeItem('Key_Id');
-                    localStorage.removeItem('Key_Id_Empresa');
+                    localStorage.removeItem('Key_Id_Usuario');
                     this.setState({
                         logged: false
                     });

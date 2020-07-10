@@ -107,9 +107,9 @@ class MeuPerfil extends Component {
         }
     }
 
-    async verifyToken() {
+    verifyToken = async () => {
         const token = localStorage.getItem('Key_Andy');
-        const id = localStorage.getItem('Key_Id');
+        const id = localStorage.getItem('Key_Id_Usuario');
 
         if (token !== null) {
             await api.get(`/verifyToken/${id}`, {
@@ -123,7 +123,7 @@ class MeuPerfil extends Component {
                     })
                 } else {
                     localStorage.removeItem('Key_Andy');
-                    localStorage.removeItem('Key_Id');
+                    localStorage.removeItem('Key_Id_Usuario');
                     this.setState({
                         logged: false
                     });
