@@ -4,6 +4,7 @@ import { FaTrash } from 'react-icons/fa';
 import api from '../../../service/api';
 import history from '../../../service/history';
 import '../styleGlobalSistema.css';
+import Helmet from 'react-helmet';
 
 class CadastroEmpresa extends Component {
     constructor () {
@@ -156,7 +157,7 @@ class CadastroEmpresa extends Component {
             const complemento = this.refs.complemento.value;
             const estado = this.refs.estado.value;
             const telefone = this.refs.telefone.value;
-            if (!nomeUsuario || !nome || !nomeFantasia || !CNPJ || !idEmpresario || !categoria || !numero || !descricao || !rua || !bairro || !cidade || !cep || !complemento || !estado || !telefone) {
+            if (!nomeUsuario || !nome || !nomeFantasia || !CNPJ || !idEmpresario || !categoria || !numero || !descricao || !rua || !bairro || !cidade || !cep || !estado || !telefone) {
                 this.setState({
                     mensagem: 'Todos os campos deverá ser preenchido.'
                 });
@@ -230,6 +231,7 @@ class CadastroEmpresa extends Component {
         const empresasAll = this.state.empresasAll;
         return (
             <div className="row">
+                <Helmet title="Andy Services" />
                 <div className="col-md-2">
                     <Menu />
                 </div>
@@ -255,19 +257,19 @@ class CadastroEmpresa extends Component {
                                                 <div className="form-row align-items-center justify-content-md-center">
                                                     <div className="form-group col-md-6">
                                                         <label className="subTitulos" htmlFor="nome">Nome</label>
-                                                        <input type="text" className="form-control" id="nome" ref='nome' />
+                                                        <input type="text" className="form-control" id="nome" ref='nome' required />
                                                     </div>
                                                     <div className="form-group col-md-6">
                                                         <label className="subTitulos" htmlFor="sobrenome">Sobrenome</label>
-                                                        <input type="text" className="form-control" id="sobrenome" ref='sobrenome' />
+                                                        <input type="text" className="form-control" id="sobrenome" ref='sobrenome' required />
                                                     </div>
                                                     <div className="form-group col-md-4">
                                                         <label className="subTitulos" htmlFor="email">E-mail</label>
-                                                        <input type="email" className="form-control" id="email" ref='email' />
+                                                        <input type="email" className="form-control" id="email" ref='email' required />
                                                     </div>
                                                     <div className="form-group col-md-4">
                                                         <label className="subTitulos" htmlFor="perfil">Perfil</label>
-                                                        <select className="form-control" id="perfil" ref='perfil'>
+                                                        <select className="form-control" id="perfil" ref='perfil' required>
                                                             <option selected>Selecione uma opção abaixo.</option>
                                                             <option value="administrador">Administrador</option>
                                                             <option value="empresa">Empresa</option>
@@ -275,7 +277,7 @@ class CadastroEmpresa extends Component {
                                                     </div>
                                                     <div className="form-group col-md-4">
                                                         <label className="subTitulos" htmlFor="email">Senha</label>
-                                                        <input type="password" className="form-control" id="senha" ref='senha' />
+                                                        <input type="password" className="form-control" id="senha" ref='senha' required />
                                                     </div>
                                                 </div>
                                                 <button type="submit" className="btn btn-success botao">Cadastrar</button>
@@ -286,30 +288,30 @@ class CadastroEmpresa extends Component {
                                         (
                                             <form onSubmit={this.handleSubmitEmpresa}>
                                                 <div className="form-row align-items-center justify-content-md-center">
-                                                    <input type="hidden" className="form-control" id="idUsuario" ref='idUsuario' value={usuario._id} />
+                                                    <input type="hidden" className="form-control" id="idUsuario" ref='idUsuario' value={usuario._id} required />
                                                     <div className="form-group col-md-3">
                                                         <label className="subTitulos" htmlFor="nomeUsuario">Usuário</label>
-                                                        <input type="text" className="form-control" id="nomeUsuario" ref='nomeUsuario' value={usuario.nome} readOnly />
+                                                        <input type="text" className="form-control" id="nomeUsuario" ref='nomeUsuario' value={usuario.nome} readOnly required />
                                                     </div>
                                                     <div className="form-group col-md-2">
                                                         <label className="subTitulos" htmlFor="cnpj">CNPJ</label>
-                                                        <input type="text" className="form-control" id="cnpj" ref='cnpj' />
+                                                        <input type="text" className="form-control" id="cnpj" ref='cnpj' required />
                                                     </div>
                                                     <div className="form-group col-md-7">
                                                         <label className="subTitulos" htmlFor="razaoSocial">Razão Social</label>
-                                                        <input type="text" className="form-control" id="razaoSocial" ref='razaoSocial' />
+                                                        <input type="text" className="form-control" id="razaoSocial" ref='razaoSocial' required />
                                                     </div>
                                                     <div className="form-group col-md-7">
                                                         <label className="subTitulos" htmlFor="nomeFantasia">Nome Fantasia</label>
-                                                        <input type="text" className="form-control" id="nomeFantasia" ref='nomeFantasia' />
+                                                        <input type="text" className="form-control" id="nomeFantasia" ref='nomeFantasia' required />
                                                     </div>
                                                     <div className="form-group col-md-2">
                                                         <label className="subTitulos" htmlFor="telefone">Telefone</label>
-                                                        <input type="text" className="form-control" id="telefone" ref='telefone' />
+                                                        <input type="text" className="form-control" id="telefone" ref='telefone' required />
                                                     </div>
                                                     <div className="form-group col-md-3">
                                                         <label className="subTitulos" htmlFor="categoria">Categoria</label>
-                                                        <select className="form-control" id="categoria" ref='categoria'>
+                                                        <select className="form-control" id="categoria" ref='categoria' required>
                                                             <option selected>Selecione uma Categoria.</option>
                                                             <option value="barbearia">Barbearia</option>
                                                             <option value="salaoBeleza">Salão Beleza</option>
@@ -319,19 +321,19 @@ class CadastroEmpresa extends Component {
                                                     </div>
                                                     <div className="form-group col-md-4">
                                                         <label className="subTitulos" htmlFor="descricao">Descrição</label>
-                                                        <input type="text" className="form-control" id="descricao" ref='descricao' />
+                                                        <input type="text" className="form-control" id="descricao" ref='descricao' required />
                                                     </div>
                                                     <div className="form-group col-md-2">
                                                         <label className="subTitulos" htmlFor="cep">CEP</label>
-                                                        <input type="text" className="form-control" id="cep" ref='cep' />
+                                                        <input type="text" className="form-control" id="cep" ref='cep' required />
                                                     </div>
                                                     <div className="form-group col-md-6">
                                                         <label className="subTitulos" htmlFor="endereco">Endereço</label>
-                                                        <input type="text" className="form-control" id="endereco" ref='endereco' />
+                                                        <input type="text" className="form-control" id="endereco" ref='endereco' required />
                                                     </div>
                                                     <div className="form-group col-md-4">
                                                         <label className="subTitulos" htmlFor="numero">Número</label>
-                                                        <input type="number" className="form-control" id="numero" ref='numero' />
+                                                        <input type="number" className="form-control" id="numero" ref='numero' required />
                                                     </div>
                                                     <div className="form-group col-md-4">
                                                         <label className="subTitulos" htmlFor="complemento">Complemento</label>
@@ -339,15 +341,15 @@ class CadastroEmpresa extends Component {
                                                     </div>
                                                     <div className="form-group col-md-4">
                                                         <label className="subTitulos" htmlFor="bairro">Bairro</label>
-                                                        <input type="text" className="form-control" id="bairro" ref='bairro' />
+                                                        <input type="text" className="form-control" id="bairro" ref='bairro' required />
                                                     </div>
                                                     <div className="form-group col-md-6">
                                                         <label className="subTitulos" htmlFor="cidade">Cidade</label>
-                                                        <input type="text" className="form-control" id="cidade" ref='cidade' />
+                                                        <input type="text" className="form-control" id="cidade" ref='cidade' required />
                                                     </div>
                                                     <div className="form-group col-md-6">
                                                         <label className="subTitulos" htmlFor="estado">Estado</label>
-                                                        <select className="form-control" id="estado" ref='estado'>
+                                                        <select className="form-control" id="estado" ref='estado' required>
                                                             <option selected>Selecione um Estado.</option>
                                                             <option value="Acre">Acre</option>
                                                             <option value="Alagoas">Alagoas</option>
@@ -389,7 +391,7 @@ class CadastroEmpresa extends Component {
                             <hr />
                             {usuariosAll.length === 0 ? '' :
                                 <div className="table-responsive-md">
-                                    <table className="table table-sm table-hover text-center align-middle table-bordered">
+                                    <table className="table table-sm table-hover text-center align-middle">
                                         <caption>Lista de Usuários</caption>
                                         <thead className="bgHead">
                                             <tr>
@@ -413,7 +415,7 @@ class CadastroEmpresa extends Component {
                             <br />
                             {empresasAll.length === 0 ? '' :
                                 <div className="table-responsive-md">
-                                    <table className="table table-sm table-hover text-center align-middle table-bordered">
+                                    <table className="table table-sm table-hover text-center align-middle">
                                         <caption>Lista de Empresas</caption>
                                         <thead className="bgHead">
                                             <tr>

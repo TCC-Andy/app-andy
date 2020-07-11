@@ -97,11 +97,11 @@ class Login extends Component {
                   <form onSubmit={this.handleSubmit}>
                     <div className="form-group">
                       <label htmlFor="email">E-mail</label>
-                      <input type="email" className="form-control" id="email" ref="email" />
+                      <input type="email" className="form-control" id="email" ref="email" required/>
                     </div>
                     <div className="form-group">
                       <label htmlFor="senha">Password</label>
-                      <input type="password" className="form-control" id="senha" ref="senha" />
+                      <input type="password" className="form-control" id="senha" ref="senha" required/>
                     </div>
                     <button type="submit" className="btn btn-success">Logar </button>
                     <Link className="txt2" to="../forgoutPassword">Esqueceu sua Senha?</Link>

@@ -23,34 +23,34 @@ body, html {
 }
 
 .bg-andy {
-    background-color: #7159C6 !important;
-    border: none !important;
+    background-color: rgba(175,238,238,0.9) !important;
+    border: none;
 }
 
 .txt1 {
     text-decoration: none;
     margin-left: 5px;
-    color: #ffffff;
+    color: #000000;
 }
 
 .txt1:hover {
     text-decoration: none;
     margin-left: 5px;
-    color: #ffffff;
+    color: #000000;
 }
 
 .txt2 {
     text-decoration: none;
     margin-left: 15px;
-    color: #ffffff;
+    color: #000000;
 }
 
 .txt2:hover {
     text-decoration: none;
     margin-left: 15px;
-    color: #ffffff;
+    color: #000000;
 }
 
 label {
-    color: #ffffff;
+    color: #000000;
 }

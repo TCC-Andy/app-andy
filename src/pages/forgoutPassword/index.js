@@ -44,7 +44,7 @@ class ForgoutPassword extends Component {
                   <form onSubmit={this.handleSubmit}>
                     <div className="form-group">
                       <label htmlFor="email">Email</label>
-                      <input type="email" className="form-control" id="email" ref="email" />
+                      <input type="email" className="form-control" id="email" ref="email" required/>
                     </div>
                     <button type="submit" className="btn btn-success">Enviar </button>
                     <Link className="txt1" to="../login"> Login </Link>

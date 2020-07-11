@@ -19,7 +19,7 @@
 
 .title {
     padding: 10px;
-    color: #7159C6;
+    color: #000000;
     font-weight: 900;
 }
 
@@ -28,7 +28,7 @@
 }
 
 .bgHead {
-    background-color: #7159C6;
+    background-color: #000000;
     color: #ffffff;
 }
 
@@ -43,7 +43,7 @@
 }
 
 .mensage {
-    color: #7159C6;
+    color: #e02041;
     font-weight: bold;
 }
 

@@ -4,6 +4,7 @@ import history from '../../../service/history';
 import Menu from '../menu';
 import '../styleGlobalSistema.css';
 import moment from 'moment';
+import Helmet from 'react-helmet';
 
 class Agenda extends Component {
     constructor () {
@@ -145,7 +146,7 @@ class Agenda extends Component {
                     });
                     this.limparForm()
                 }, 1500)
-            } else if(response.data.status === 400) {
+            } else if (response.data.status === 400) {
                 this.setState({
                     agendasAll: []
                 });
@@ -160,6 +161,7 @@ class Agenda extends Component {
         const dataAtual = this.state.dataAtual;
         return (
             <div className="row">
+                <Helmet title="Andy Services" />
                 <div className="col-md-2">
                     <Menu />
                 </div>
@@ -172,7 +174,7 @@ class Agenda extends Component {
                                     <form onSubmit={this.handleSubmit}>
                                         <div className="form-row align-items-center justify-content-md-center">
                                             <div className="form-group col-md-4">
-                                                <select className="form-control" ref="funcionario" id="funcionario">
+                                                <select className="form-control" ref="funcionario" id="funcionario" required>
                                                     <option selected={selected === true ? 'selected' : ''}>Selecione um Funcionário.</option>
                                                     {funcionarios.map(funcionario => (
                                                         <option value={funcionario._id}>{funcionario.nome + ' ' + funcionario.sobrenome}</option>
@@ -180,7 +182,7 @@ class Agenda extends Component {
                                                 </select>
                                             </div>
                                             <div className="form-group col-md-4">
-                                                <input type="date" className="form-control" id="data" ref='data' />
+                                                <input type="date" className="form-control" id="data" ref='data'/>
                                             </div>
                                             <div className="form-group col-md-4">
                                                 <button className="btn btn-success"> Pesquisar </button> &nbsp;
@@ -237,21 +239,21 @@ class Agenda extends Component {
                                                             <p className="card-text">Serviço: {agendas.nomeServico}</p>
                                                             <p className="card-text">Horário: {agendas.inicioServico + ' - ' + agendas.fimServico}</p>
                                                         </div>
-                                                        {agendas.status === 1 && agendas.dataAgenda === dataAtual || agendas.status === 1 && agendas.dataAgenda < dataAtual ? 
-                                                                <div className="card-footer text-right">
-                                                                    <button type="submit" className="btn btn-sm btn-outline-success" onClick={() => this.concluirAgendamento(agendas._id)}> Concluir </button>
+                                                        {(agendas.status === 1 && agendas.dataAgenda === dataAtual) || (agendas.status === 1 && agendas.dataAgenda < dataAtual) ?
+                                                            <div className="card-footer text-right">
+                                                                <button type="submit" className="btn btn-sm btn-outline-success" onClick={() => this.concluirAgendamento(agendas._id)}> Concluir </button>
+                                                            </div>
+                                                            :
+                                                            agendas.status === 2 ?
+                                                                <div className="card-footer text-center">
+                                                                    <span className="text-success">Atendimento concluido com sucesso.</span>
                                                                 </div>
                                                                 :
-                                                                agendas.status === 2 ?
+                                                                agendas.status === 0 ?
                                                                     <div className="card-footer text-center">
-                                                                        <span className="text-success">Atendimento concluido com sucesso.</span>
-                                                                    </div>
-                                                                    :
-                                                                    agendas.status === 0 ?
-                                                                        <div className="card-footer text-center">
-                                                                            <span className="text-danger">Atendimento cancelado.</span>
-                                                                        </div> :
-                                                                        ""
+                                                                        <span className="text-danger">Atendimento cancelado.</span>
+                                                                    </div> :
+                                                                    ""
                                                         }
                                                     </div>
                                                     <br />

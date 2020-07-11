@@ -5,6 +5,7 @@ import Menu from '../menu/index';
 import '../styleGlobalSistema.css';
 import Select from 'react-select'
 import { FaPencilAlt, FaTrash } from 'react-icons/fa';
+import Helmet from 'react-helmet';
 
 class Funcionario extends Component {
     constructor () {
@@ -207,6 +208,7 @@ class Funcionario extends Component {
         const alterarFuncionarios = this.state.editarFuncionarios;
         return (
             <div className="row">
+                <Helmet title="Andy Services" />
                 <div className="col-md-2">
                     <Menu />
                 </div>
@@ -220,35 +222,35 @@ class Funcionario extends Component {
                                         <div className="form-row align-items-center justify-content-md-center">
                                             <div className="form-group col-md-6">
                                                 <label className="subTitulos" htmlFor="servico">Nome</label>
-                                                <input type="text" className="form-control" id="nome" ref='nome' defaultValue={alterarFuncionarios.length === 0 ? '' : alterarFuncionarios.nome} />
+                                                <input type="text" className="form-control" id="nome" ref='nome' defaultValue={alterarFuncionarios.length === 0 ? '' : alterarFuncionarios.nome} required/>
                                             </div>
                                             <div className="form-group col-md-6">
                                                 <label className="subTitulos" htmlFor="descricao">Sobrenome</label>
-                                                <input type="text" className="form-control" id="sobrenome" ref='sobrenome' defaultValue={alterarFuncionarios.length === 0 ? '' : alterarFuncionarios.sobrenome} />
+                                                <input type="text" className="form-control" id="sobrenome" ref='sobrenome' defaultValue={alterarFuncionarios.length === 0 ? '' : alterarFuncionarios.sobrenome} required/>
                                             </div>
                                             <div className="form-group col-md-6">
                                                 <label className="subTitulos" htmlFor="valor">E-mail</label>
-                                                <input type="email" className="form-control" id="email" ref='email' defaultValue={alterarFuncionarios.length === 0 ? '' : alterarFuncionarios.email} />
+                                                <input type="email" className="form-control" id="email" ref='email' defaultValue={alterarFuncionarios.length === 0 ? '' : alterarFuncionarios.email} required/>
                                             </div>
                                             <div className="form-group col-md-6">
                                                 <label className="subTitulos" htmlFor="tempoEstimado">Telefone</label>
-                                                <input type="tel" className="form-control" id="telefone" ref='telefone' defaultValue={alterarFuncionarios.length === 0 ? '' : alterarFuncionarios.telefone} />
+                                                <input type="tel" className="form-control" id="telefone" ref='telefone' defaultValue={alterarFuncionarios.length === 0 ? '' : alterarFuncionarios.telefone} required/>
                                             </div>
                                             <div className="form-group col-md-6">
                                                 <label className="subTitulos" htmlFor="tempoEstimado">Hora Inicio Trabalho</label>
-                                                <input type="time" className="form-control" id="horaInicioTrabalho" ref='horaInicioTrabalho' defaultValue={alterarFuncionarios.length === 0 ? '' : alterarFuncionarios.horaInicioTrabalho} />
+                                                <input type="time" className="form-control" id="horaInicioTrabalho" ref='horaInicioTrabalho' defaultValue={alterarFuncionarios.length === 0 ? '' : alterarFuncionarios.horaInicioTrabalho} required/>
                                             </div>
                                             <div className="form-group col-md-6">
                                                 <label className="subTitulos" htmlFor="tempoEstimado">Hora Inicio Almoço</label>
-                                                <input type="time" className="form-control" id="horaAlmocoInicio" ref='horaAlmocoInicio' defaultValue={alterarFuncionarios.length === 0 ? '' : alterarFuncionarios.horaAlmocoInicio} />
+                                                <input type="time" className="form-control" id="horaAlmocoInicio" ref='horaAlmocoInicio' defaultValue={alterarFuncionarios.length === 0 ? '' : alterarFuncionarios.horaAlmocoInicio} required/>
                                             </div>
                                             <div className="form-group col-md-6">
                                                 <label className="subTitulos" htmlFor="tempoEstimado">Hora Fim Almoço</label>
-                                                <input type="time" className="form-control" id="horaAlmocoFim" ref='horaAlmocoFim' defaultValue={alterarFuncionarios.length === 0 ? '' : alterarFuncionarios.horaAlmocoFim} />
+                                                <input type="time" className="form-control" id="horaAlmocoFim" ref='horaAlmocoFim' defaultValue={alterarFuncionarios.length === 0 ? '' : alterarFuncionarios.horaAlmocoFim} required/>
                                             </div>
                                             <div className="form-group col-md-6">
                                                 <label className="subTitulos" htmlFor="tempoEstimado">Hora Fim Trabalho</label>
-                                                <input type="time" className="form-control" id="horaFimTrabalho" ref='horaFimTrabalho' defaultValue={alterarFuncionarios.length === 0 ? '' : alterarFuncionarios.horaFimTrabalho} />
+                                                <input type="time" className="form-control" id="horaFimTrabalho" ref='horaFimTrabalho' defaultValue={alterarFuncionarios.length === 0 ? '' : alterarFuncionarios.horaFimTrabalho} required/>
                                             </div>
                                             <div className="form-group col-md-12">
                                                 <label className="subTitulos" htmlFor="servicos">Serviços</label>
@@ -260,6 +262,7 @@ class Funcionario extends Component {
                                                     className="basic-multi-select"
                                                     placeholder="Selecione um e/ou mais Serviços."
                                                     isSearchable
+                                                    required
                                                 />
                                             </div>
                                         </div>

@@ -49,11 +49,11 @@ class ResetPassword extends Component {
                     <input type="text" className="form-control" value={this.props.match.params.token} id="token" ref="token" />
                     <div className="form-group">
                       <label htmlFor="email">Email</label>
-                      <input type="email" className="form-control" id="email" ref="email" />
+                      <input type="email" className="form-control" id="email" ref="email" required/>
                     </div>
                     <div className="form-group">
                       <label htmlFor="senha">Password</label>
-                      <input type="password" className="form-control" id="senha" ref="senha" />
+                      <input type="password" className="form-control" id="senha" ref="senha" required/>
                     </div>
                     <button type="submit" className="btn btn-success">Alterar </button>
                   </form>

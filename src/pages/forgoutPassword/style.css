@@ -23,6 +23,6 @@ body, html {
 }
 
 .bg-andy {
-    background-color: #7159C6 !important;
-    border: none !important;
+    background-color: rgba(175,238,238,0.9) !important;
+    border: none;
 }

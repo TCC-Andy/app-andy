@@ -16,7 +16,7 @@
     list-style: none;
     padding: 15px 30px;
     color: #ffffff;
-    background-color:#7159C6;
+    background-color:rgba(175,238,238,0.9);
     transition: all .2s linear;
 }
 
@@ -30,7 +30,9 @@
 }
 
 .perfil {
-    padding-top: 20px;
+    height: 40px;
+    background-color:rgba(175,238,238,0.9);
+    padding-top: 10px;
 }
 
 .avatar {
@@ -39,13 +41,14 @@
 }
 
 .boas-vindas {
-    color: #ffffff;
+    color: #000000;
     margin-top: 50px;
     margin-left: 30px;
+    font-weight: bold;
 }
 
 .boas-vindas:hover {
-    color: #7159C6;
+    color: #000000;
     margin-top: 50px;
     margin-left: 30px;
     text-decoration: none;

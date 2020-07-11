@@ -4,6 +4,7 @@ import history from '../../../service/history';
 import Menu from '../menu/index';
 import '../styleGlobalSistema.css';
 import { FaPencilAlt, FaTrash } from 'react-icons/fa';
+import Helmet from 'react-helmet';
 
 class Servico extends Component {
     constructor () {
@@ -165,6 +166,7 @@ class Servico extends Component {
         const editServicos = this.state.edit;
         return (
             <div className="row">
+                <Helmet title="Andy Services" />
                 <div className="col-md-2">
                     <Menu />
                 </div>
@@ -178,19 +180,19 @@ class Servico extends Component {
                                         <div className="form-row align-items-center justify-content-md-center">
                                             <div className="form-group col-md-6">
                                                 <label className="subTitulos" htmlFor="servico">Serviço</label>
-                                                <input type="text" className="form-control" id="servico" ref='servico' defaultValue={editServicos.length === 0 ? '' : editServicos.nome} />
+                                                <input type="text" className="form-control" id="servico" ref='servico' defaultValue={editServicos.length === 0 ? '' : editServicos.nome} required/>
                                             </div>
                                             <div className="form-group col-md-6">
                                                 <label className="subTitulos" htmlFor="descricao">Descrição</label>
-                                                <input type="text" className="form-control" id="descricao" ref='descricao' defaultValue={editServicos.length === 0 ? '' : editServicos.descricao} />
+                                                <input type="text" className="form-control" id="descricao" ref='descricao' defaultValue={editServicos.length === 0 ? '' : editServicos.descricao} required/>
                                             </div>
                                             <div className="form-group col-md-6">
                                                 <label className="subTitulos" htmlFor="valor">Valor</label>
-                                                <input type="text" className="form-control" id="valor" ref='valor' defaultValue={editServicos.length === 0 ? '' : editServicos.preco} />
+                                                <input type="text" className="form-control" id="valor" ref='valor' defaultValue={editServicos.length === 0 ? '' : editServicos.preco} required/>
                                             </div>
                                             <div className="form-group col-md-6">
                                                 <label className="subTitulos" htmlFor="tempoEstimado">Tempo Estimado</label>
-                                                <input type="time" className="form-control" id="tempoEstimado" ref='tempoEstimado' defaultValue={editServicos.length === 0 ? '' : editServicos.tempo} />
+                                                <input type="time" className="form-control" id="tempoEstimado" ref='tempoEstimado' defaultValue={editServicos.length === 0 ? '' : editServicos.tempo} required/>
                                             </div>
                                         </div>
                                         {editServicos.length === 0 ?
@@ -249,5 +251,3 @@ class Servico extends Component {
 }
 
 export default Servico;
-
-

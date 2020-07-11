@@ -3,6 +3,7 @@ import api from '../../../service/api';
 import history from '../../../service/history';
 import Menu from '../menu';
 import '../styleGlobalSistema.css';
+import Helmet from 'react-helmet';
 
 class MeuPerfil extends Component {
     constructor () {
@@ -144,6 +145,7 @@ class MeuPerfil extends Component {
         const mensagemUsuario = this.state.mensagemUsuario;
         return (
             <div className="row">
+                <Helmet title="Andy Services" />
                 <div className="col-md-2">
                     <Menu />
                 </div>
@@ -167,19 +169,19 @@ class MeuPerfil extends Component {
                                                     </div>
                                                     <div className="form-group col-md-6">
                                                         <label className="subTitulos" htmlFor="nome">Nome:</label>
-                                                        <input type="text" className="form-control" id="nome" ref="nome" defaultValue={usuario.nome} />
+                                                        <input type="text" className="form-control" id="nome" ref="nome" defaultValue={usuario.nome} required/>
                                                     </div>
                                                     <div className="form-group col-md-6">
                                                         <label className="subTitulos" htmlFor="sobreNome">Sobrenome:</label>
-                                                        <input type="text" className="form-control" id="sobreNome" ref="sobreNome" defaultValue={usuario.sobrenome} />
+                                                        <input type="text" className="form-control" id="sobreNome" ref="sobreNome" defaultValue={usuario.sobrenome} required/>
                                                     </div>
                                                     <div className="form-group col-md-6">
                                                         <label className="subTitulos" htmlFor="email">E-mail:</label>
-                                                        <input type="email" className="form-control" id="email" ref="email" defaultValue={usuario.email} />
+                                                        <input type="email" className="form-control" id="email" ref="email" defaultValue={usuario.email} required/>
                                                     </div>
                                                     <div className="form-group col-md-6">
                                                         <label className="subTitulos" htmlFor="email">Senha: <em className="mensage">Digite sua senha para confirmar a alteração.</em> </label>
-                                                        <input type="password" className="form-control" id="senha" ref="senha" />
+                                                        <input type="password" className="form-control" id="senha" ref="senha" required/>
                                                     </div>
                                                     <div className="form-group col-md-6">
                                                         <button type="submit" className="btn btn-primary">Alterar</button>
@@ -202,19 +204,19 @@ class MeuPerfil extends Component {
                                                     </div>
                                                     <div className="form-group col-md-6">
                                                         <label className="subTitulos" htmlFor="nome">Nome:</label>
-                                                        <input type="text" className="form-control" id="nome" ref="nome" defaultValue={usuario.nome} />
+                                                        <input type="text" className="form-control" id="nome" ref="nome" defaultValue={usuario.nome} required/>
                                                     </div>
                                                     <div className="form-group col-md-6">
                                                         <label className="subTitulos" htmlFor="sobreNome">Sobrenome:</label>
-                                                        <input type="text" className="form-control" id="sobreNome" ref="sobreNome" defaultValue={usuario.sobrenome} />
+                                                        <input type="text" className="form-control" id="sobreNome" ref="sobreNome" defaultValue={usuario.sobrenome} required/>
                                                     </div>
                                                     <div className="form-group col-md-6">
                                                         <label className="subTitulos" htmlFor="email">E-mail:</label>
-                                                        <input type="email" className="form-control" id="email" ref="email" defaultValue={usuario.email} />
+                                                        <input type="email" className="form-control" id="email" ref="email" defaultValue={usuario.email} required/>
                                                     </div>
                                                     <div className="form-group col-md-6">
                                                         <label className="subTitulos" htmlFor="email">Senha: <em className="mensage">Digite sua senha para confirmar a alteração.</em> </label>
-                                                        <input type="password" className="form-control" id="senha" ref="senha" />
+                                                        <input type="password" className="form-control" id="senha" ref="senha" required/>
                                                     </div>
                                                     <div className="form-group col-md-6">
                                                         <button type="submit" className="btn btn-primary">Alterar</button>
@@ -234,43 +236,43 @@ class MeuPerfil extends Component {
                                                     </div>
                                                     <div className="form-group col-md-6">
                                                         <label className="subTitulos" htmlFor="nome">Nome:</label>
-                                                        <input type="text" className="form-control" id="nomeEmpresa" ref="nomeEmpresa" defaultValue={empresa.nome} />
+                                                        <input type="text" className="form-control" id="nomeEmpresa" ref="nomeEmpresa" defaultValue={empresa.nome} required/>
                                                     </div>
                                                     <div className="form-group col-md-6">
                                                         <label className="subTitulos" htmlFor="nomeFantasia">Nome Fantasia:</label>
-                                                        <input type="text" className="form-control" id="nomeFantasia" ref="nomeFantasia" defaultValue={empresa.nomeFantasia} />
+                                                        <input type="text" className="form-control" id="nomeFantasia" ref="nomeFantasia" defaultValue={empresa.nomeFantasia} required/>
                                                     </div>
                                                     <div className="form-group col-md-3">
                                                         <label className="subTitulos" htmlFor="cep">CEP:</label>
-                                                        <input type="text" className="form-control" id="cep" ref="cep" defaultValue={empresa.cep} />
+                                                        <input type="text" className="form-control" id="cep" ref="cep" defaultValue={empresa.cep} required/>
                                                     </div>
                                                     <div className="form-group col-md-7">
                                                         <label className="subTitulos" htmlFor="rua">Rua:</label>
-                                                        <input type="text" className="form-control" id="rua" ref="rua" defaultValue={empresa.rua} />
+                                                        <input type="text" className="form-control" id="rua" ref="rua" defaultValue={empresa.rua} required/>
                                                     </div>
                                                     <div className="form-group col-md-2">
                                                         <label className="subTitulos" htmlFor="numero">Número:</label>
-                                                        <input type="number" className="form-control" id="numero" ref="numero" defaultValue={empresa.numero} />
+                                                        <input type="number" className="form-control" id="numero" ref="numero" defaultValue={empresa.numero} required/>
                                                     </div>
                                                     <div className="form-group col-md-6">
                                                         <label className="subTitulos" htmlFor="complento">Complemento:</label>
-                                                        <input type="text" className="form-control" id="complemento" ref="complemento" defaultValue={empresa.complemento} />
+                                                        <input type="text" className="form-control" id="complemento" ref="complemento" defaultValue={empresa.complemento} required/>
                                                     </div>
                                                     <div className="form-group col-md-3">
                                                         <label className="subTitulos" htmlFor="bairro">Bairro:</label>
-                                                        <input type="text" className="form-control" id="bairro" ref="bairro" defaultValue={empresa.bairro} />
+                                                        <input type="text" className="form-control" id="bairro" ref="bairro" defaultValue={empresa.bairro} required/>
                                                     </div>
                                                     <div className="form-group col-md-3">
                                                         <label className="subTitulos" htmlFor="telefone">Telefone:</label>
-                                                        <input type="text" className="form-control" id="telefone" ref="telefone" defaultValue={empresa.telefone} />
+                                                        <input type="text" className="form-control" id="telefone" ref="telefone" defaultValue={empresa.telefone} required/>
                                                     </div>
                                                     <div className="form-group col-md-3">
                                                         <label className="subTitulos" htmlFor="bairro">Cidade:</label>
-                                                        <input type="text" className="form-control" id="cidade" ref="cidade" defaultValue={empresa.cidade} />
+                                                        <input type="text" className="form-control" id="cidade" ref="cidade" defaultValue={empresa.cidade} required/>
                                                     </div>
                                                     <div className="form-group col-md-9">
                                                         <label className="subTitulos" htmlFor="descricao">Descrição:</label>
-                                                        <input type="text" className="form-control" id="descricao" ref="descricao" defaultValue={empresa.descricao} />
+                                                        <input type="text" className="form-control" id="descricao" ref="descricao" defaultValue={empresa.descricao} required/>
                                                     </div>
                                                 </div>
                                                 <button type="submit" className="btn btn-primary">Alterar</button>
