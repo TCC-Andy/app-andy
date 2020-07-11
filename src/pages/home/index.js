@@ -135,7 +135,7 @@ const Home = () => {
                             <div className="infos">
                                 <i className="icone"><FaBook /></i><br />
                                 <span className="titulo_infor">Agendamento Online.</span><br />
-                                <span className="mensagem_info">Seus clientes com mais facilidade para agendar um horario seus agendamento em um único lugar.</span>
+                                <span className="mensagem_info">Seus clientes com mais facilidade para agendar um horario e seus agendamento em um único lugar.</span>
                             </div>
                         </Col>
                         <Col md="4">
