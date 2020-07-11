@@ -47,7 +47,7 @@ class ResetPassword extends Component {
               <div className="card bg-andy">
                 <div className="card-body">
                   <form onSubmit={this.handleSubmit}>
-                    <input type="text" className="form-control" value={this.props.match.params.token} id="token" ref="token" />
+                    <input type="hidden" className="form-control" value={this.props.match.params.token} id="token" ref="token" />
                     <div className="form-group">
                       <label htmlFor="email">Email</label>
                       <input type="email" className="form-control" id="email" ref="email" required/>
