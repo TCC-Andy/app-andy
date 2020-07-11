@@ -18,11 +18,12 @@ body {
 
 .logo {
     width: 150px;
-    margin-top: -40px;
+    margin-top: 15px;
+    margin-left: 15px;
 }
 
 .btLogin {
-    margin-top: -40px;
+    margin-top: 0;
 }
 
 .header{
@@ -35,6 +36,10 @@ body {
     height: 700px;
 }
 
+.navBarSite {
+    height: 80px;
+}
+
 .associados {
     margin-left: 85%;
 }
@@ -45,7 +50,7 @@ body {
     font-size: 40px;
     font-weight: 700;
     line-height: 50px;
-    padding-top: 20px;
+    padding-top: 150px;
     margin-left: 15px;
     text-shadow: 2px 2px 3px #000000;
 }

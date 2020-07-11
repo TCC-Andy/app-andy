@@ -39,7 +39,7 @@ const Home = () => {
                 <Container className="themed-container" fluid={true} >
                     <Row>
                         <Col>
-                            <Navbar light expand="md">
+                            <Navbar light expand="md" className="fixed-top navBarSite">
                                 <NavbarBrand href="/"><img className="logo" src={logo} alt="logo" /></NavbarBrand>
                                 <NavbarToggler onClick={toggle} />
                                 <Collapse isOpen={isOpen} navbar>
