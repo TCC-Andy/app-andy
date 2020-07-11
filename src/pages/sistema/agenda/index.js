@@ -152,7 +152,8 @@ class Agenda extends Component {
                 });
             }
         })
-    }
+	}
+	
     render() {
         const funcionarios = this.state.funcionarios;
         const agenda = this.state.agendasAll;
@@ -271,5 +272,3 @@ class Agenda extends Component {
 }
 
 export default Agenda;
-
-

@@ -378,5 +378,3 @@ class Funcionario extends Component {
 }
 
 export default Funcionario;
-
-

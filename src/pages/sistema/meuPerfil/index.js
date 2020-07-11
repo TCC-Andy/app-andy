@@ -290,5 +290,3 @@ class MeuPerfil extends Component {
 }
 
 export default MeuPerfil;
-
-

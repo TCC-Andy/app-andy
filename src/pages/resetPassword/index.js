@@ -27,7 +27,6 @@ class ResetPassword extends Component {
 			senha: this.refs.senha.value
 		};
 		await api.post('/updatePassword', data).then((response) => {
-			console.log(response.data);
 			if (response.data.status === 200) {
 				this.setState({
 					mensagem: response.data.mensagem
@@ -121,5 +120,3 @@ class ResetPassword extends Component {
 }
 
 export default ResetPassword;
-
-

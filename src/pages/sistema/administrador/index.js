@@ -38,7 +38,6 @@ class CadastroEmpresa extends Component {
 
 	carregarEmpresas = async () => {
 		const empresas = await api.get('/showCompanies');
-		console.log(empresas);
 		this.setState({
 			empresasAll: empresas.data
 		})

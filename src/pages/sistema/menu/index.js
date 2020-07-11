@@ -24,7 +24,8 @@ export default function Menu() {
     async function handleLogout() {
         localStorage.clear();
         history.push('/');
-    }
+	}
+	
     return (
         <div className="sidebar">
             <div className="perfil">
