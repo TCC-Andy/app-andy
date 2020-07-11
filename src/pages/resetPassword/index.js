@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Helmet from 'react-helmet';
 import api from '../../service/api';
+import { Link } from 'react-router-dom';
 import './style.css';
 
 class ResetPassword extends Component {
@@ -56,6 +57,8 @@ class ResetPassword extends Component {
                       <input type="password" className="form-control" id="senha" ref="senha" required/>
                     </div>
                     <button type="submit" className="btn btn-success">Alterar </button>
+                    <Link className="txt1" to="../login"> Login </Link>
+                    <Link className="txt2" to="/">Home</Link>
                   </form>
                 </div>
               </div>

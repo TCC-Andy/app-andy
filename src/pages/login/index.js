@@ -105,6 +105,7 @@ class Login extends Component {
                     </div>
                     <button type="submit" className="btn btn-success">Logar </button>
                     <Link className="txt2" to="../forgoutPassword">Esqueceu sua Senha?</Link>
+                    <Link className="txt2" to="/">Home</Link>
                   </form>
                 </div>
               </div>

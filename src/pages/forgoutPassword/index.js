@@ -48,6 +48,7 @@ class ForgoutPassword extends Component {
                     </div>
                     <button type="submit" className="btn btn-success">Enviar </button>
                     <Link className="txt1" to="../login"> Login </Link>
+                    <Link className="txt2" to="/">Home</Link>
                   </form>
                 </div>
               </div>
