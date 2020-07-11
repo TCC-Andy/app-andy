@@ -46,17 +46,19 @@ class Login extends Component {
 					}, 1000)
 				} else {
 					api.get(`/showCompanyUser/${idUsuario}`).then(resp => {
-						const idEmpresa = resp.data.emp._id;
-						localStorage.setItem('Key_Id_Empresa', idEmpresa);
-						this.setState({
-							mensagem: 'Usuário logado com sucesso.'
-						})
-						setTimeout(() => {
+						if (resp.data.status === 200) {
+							const idEmpresa = resp.data.emp._id;
+							localStorage.setItem('Key_Id_Empresa', idEmpresa);
 							this.setState({
-								mensagem: undefined
+								mensagem: 'Usuário logado com sucesso.'
 							})
-							history.push('/agenda');
-						}, 1500)
+							setTimeout(() => {
+								this.setState({
+									mensagem: undefined
+								})
+								history.push('/agenda');
+							}, 1500)
+						}
 					})
 				}
 			} else if (response.data.status === 400) {
