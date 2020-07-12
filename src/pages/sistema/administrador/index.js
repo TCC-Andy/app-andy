@@ -390,7 +390,7 @@ class CadastroEmpresa extends Component {
 							{usuariosAll.length === 0 ? '' :
 								<div className="table-responsive-md">
 									<table className="table table-sm table-hover text-center align-middle">
-										<caption>Lista de Usuários</caption>
+										<caption>Lista de Usuários - ${usuariosAll.length} usuários.</caption>
 										<thead className="bgHead">
 											<tr>
 												<th className="align-middle">Nome Completo</th>
@@ -414,7 +414,7 @@ class CadastroEmpresa extends Component {
 							{empresasAll.length === 0 ? '' :
 								<div className="table-responsive-md">
 									<table className="table table-sm table-hover text-center align-middle">
-										<caption>Lista de Empresas</caption>
+										<caption>Lista de Empresas ${empresasAll.length} empresas.</caption>
 										<thead className="bgHead">
 											<tr>
 												<th className="align-middle">Razão Social</th>
